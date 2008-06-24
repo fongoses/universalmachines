@@ -11,14 +11,34 @@
 #include <vector>
 #include <set>
 #include <map>
-#include "turing.h"
-#include "stringUtils.h"
+#include "Turing.h"
+#include "etc/stringUtils.h"
+
+bool operator==(const Saida& s1, const Saida& s2) {
+	return (s1.estado==s2.estado)&&(s1.simbolo==s2.simbolo)&&(s1.movimento
+			==s2.movimento);
+}
+
+bool operator==(const Entrada& e1, const Entrada& e2) {
+	return (e1.estado==e2.estado)&&(e1.simbolo==e2.simbolo);
+}
+
+bool operator<(const Entrada& e1, const Entrada& e2) {
+	if (e1.estado<e2.estado)
+		return true;
+	else {
+		if ((e1.estado==e2.estado)&&(e1.simbolo<e2.simbolo))
+			return true;
+	}
+	return false;
+
+}
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
 
-	TuringMachine turingMachine;
+	Turing turingMachine;
 
 	char *programa, *fita;
 
@@ -72,8 +92,6 @@ int main(int argc, char *argv[]) {
 				Entrada entrada(regra[0], regra[1]);
 				Saida saida(regra[2], regra[3], regra[4]);
 				turingMachine.delta[entrada] = saida;
-				//cout << "delta(" << regra[0] << "," << regra[1] << ") = (";
-				//cout << regra[2] << "," << regra[3] << "," << regra[4] << ")" << endl;
 			}
 		}
 	} catch (string s)
@@ -87,114 +105,13 @@ int main(int argc, char *argv[]) {
 	} while (turingMachine.executa());
 
 	if (turingMachine.final())
-		cout << "A maquina de Turing parou e respondeu TRUE" << endl;
+		cout << endl << "A maquina de Turing parou e respondeu TRUE" << endl;
 	else
-		cout << "A maquina de Turing parou e respondeu FALSE" << endl;
+		cout << endl << "A maquina de Turing parou e respondeu FALSE" << endl;
 
-	cin >> line;
+	cout << endl << endl << "As Producoes foram: " << endl;
+	cout << turingMachine.producoes;
 
-	//system("PAUSE");
+	system("PAUSE");
 	return EXIT_SUCCESS;
 }
-
-/*
- //Questao 8.2.5c
- int main(int argc, char *argv[])
- {
- 
- TuringMachine turingMachine;
- 
- Entrada entrada1("q0","0");
- Saida saida1("q1","1","R");
- 
- turingMachine.delta[entrada1] = saida1;
- 
- 
- Entrada entrada2("q1","1");
- Saida saida2("q2","0","L");
- 
- turingMachine.delta[entrada2] = saida2;
-
- Entrada entrada3("q2","1");
- Saida saida3("q0","1","R");
- 
- turingMachine.delta[entrada3] = saida3;
- 
- Entrada entrada4("q1","B");
- Saida saida4("qf","B","R");
- 
- turingMachine.delta[entrada4] = saida4;
- 
- turingMachine.finais.insert("qf");
- turingMachine.estado = "q0";
- 
- turingMachine.fita.push_back("0");
- turingMachine.fita.push_back("1");
- turingMachine.fita.push_back("1");
- turingMachine.fita.push_back("1");
- turingMachine.fita.push_back("1");
- turingMachine.fita.push_back("1");
- 
- while(1)
- {
- turingMachine.imprimeFita();
- turingMachine.executa();
- system("PAUSE");
- }
- 
- 
- system("PAUSE");
- return EXIT_SUCCESS;
- }
- */
-
-/*
- //Questao 8.2.5b
- int main(int argc, char *argv[])
- {
- 
- TuringMachine turingMachine;
- 
- Entrada entrada1("q0","0");
- Saida saida1("q0","B","R");
- 
- turingMachine.delta[entrada1] = saida1;
- 
- 
- Entrada entrada2("q0","1");
- Saida saida2("q1","B","R");
- 
- turingMachine.delta[entrada2] = saida2;
-
- Entrada entrada3("q1","1");
- Saida saida3("q1","B","R");
- 
- turingMachine.delta[entrada3] = saida3;
- 
- Entrada entrada4("q1","B");
- Saida saida4("qf","B","R");
- 
- turingMachine.delta[entrada4] = saida4;
- 
- turingMachine.finais.insert("qf");
- turingMachine.estado = "q0";
- 
- turingMachine.fita.push_back("0");
- turingMachine.fita.push_back("0");
- turingMachine.fita.push_back("1");
- turingMachine.fita.push_back("1");
- turingMachine.fita.push_back("1");
- turingMachine.fita.push_back("1");
- 
- while(1)
- {
- turingMachine.imprimeFita();
- turingMachine.executa();
- system("PAUSE");
- }
- 
- 
- system("PAUSE");
- return EXIT_SUCCESS;
- }
- */
