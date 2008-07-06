@@ -15,12 +15,12 @@ Saida::Saida(string tail, string tailPilha, string concatenar,
 	}
 
 	if (tailPilha.compare("tail") == 0) {
-		this->setTailPilha(true);
+		this->setTailStack(0,true);
 	} else {
-		this->setTailPilha(false);
+		this->setTailStack(0,false);
 	}
 	this->setConcatenar(concatenar);
-	this->setConcatenarPilha(concatenarPilha);
+	this->setConcatenarStack(0,concatenarPilha);
 	this->setProximoEstado(proximoEstado);
 }
 
@@ -36,19 +36,19 @@ void Saida::setProximoEstado(string proximoEstado) {
 	this->proximoEstado = proximoEstado;
 }
 
-void Saida::setTailPilha(bool tailPilha) {
-	this->tailPilha = tailPilha;
+
+void Saida::setTailStack(int stack ,bool tailStack){
+	this->tailStack[stack] = tailStack;
 }
-void Saida::setConcatenarPilha(string concatenarPilha) {
-	this->concatenarPilha = concatenarPilha;
+void Saida::setConcatenarStack(int stack ,string concatenarStack){
+	this->concatenarStack[stack] = concatenarStack;
 }
 
-bool Saida::isTailPilha() const {
-	return (this->tailPilha);
+bool Saida::isTailStack(int stack)const{
+	return(this->tailStack[stack]);
 }
-
-string Saida::getConcatenarPilha() const {
-	return (this->concatenarPilha);
+string Saida::getConcatenarStack(int stack)const{
+	return(this->concatenarStack[stack]);
 }
 
 bool Saida::isTail() const {

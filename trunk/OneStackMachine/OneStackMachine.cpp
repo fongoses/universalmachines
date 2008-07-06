@@ -9,14 +9,11 @@
 #include <iostream>
 #include "etc\Arquivo.h"
 #include "etc\stringUtils.h"
-#include "Post.h"
+#include "OneStack.h"
 #include <map>
 using namespace std;
 
-bool operator==(const Saida& s1, const Saida& s2) {
-	return (s1.tail==s2.tail)&&(s1.concatenar==s2.concatenar)
-			&&(s1.proximoEstado ==s2.proximoEstado);
-}
+
 bool operator==(const Entrada& e1, const Entrada& e2) {
 	return (e1.estado==e2.estado)&&(e1.head==e2.head);
 }
@@ -32,6 +29,11 @@ bool operator<(const Entrada& e1, const Entrada& e2) {
 
 }
 
+bool operator==(const Saida& s1, const Saida& s2) {
+	return (s1.tail==s2.tail)&&(s1.concatenar==s2.concatenar)
+			&&(s1.proximoEstado ==s2.proximoEstado);
+}
+
 int main(int argc, char *argv[]) {
 
 	vector<string> palavra;
@@ -42,7 +44,7 @@ int main(int argc, char *argv[]) {
 
 	Cadeia cadeia;
 
-	Post maquinaPost;
+	OneStack oneStack;
 
 	char *programa, *fila;
 
@@ -67,7 +69,7 @@ int main(int argc, char *argv[]) {
 			vector<string> linha = StringUtils::tokenize(line);
 			palavra = linha;
 			cadeia.setPalavra(linha);
-			maquinaPost.setPalavraEntrada(cadeia.getPalavra());
+			oneStack.setPalavraEntrada(cadeia.getPalavra());
 		}
 	}
 
@@ -76,27 +78,28 @@ int main(int argc, char *argv[]) {
 		if (line.compare("") != 0) {
 			try {
 				vector<string> linha = StringUtils::tokenize(line);
-				if(linha.size() != 5) {
+				if(linha.size() != 8) {
 					throw string("Programa mal formado");
 				} else {
-					Entrada in(linha[0],linha[1]);
-					Saida out(linha[2],linha[3],linha[4]);
-					maquinaPost.insertDados(in,out);
+					/*Entrada in(linha[0],linha[1],linha[2]);
+					Saida out(linha[3],linha[4],linha[5],linha[6],linha[7]);
+					oneStack.insertDados(in,out);*/
 				}
 
 			} catch (string s) {
 				cout << s << endl;
+				system("pause");
 				exit(1);
 			}
 
 		}
 	}
-	cout << "Programa da Maquina Post: " << endl << endl;
-	maquinaPost.showDelta();
-	if (maquinaPost.executar()) {
-		cout << endl << endl <<"A maquina de Post Aceitou a palavra: ";
+	cout << "Programa da Maquina de uma Pilha: " << endl << endl;
+	oneStack.showDelta();
+	if (oneStack.executar()) {
+		cout << endl << endl <<"A Maquina de uma Pilha Aceitou a palavra: ";
 	} else {
-		cout << endl << endl << "A maquina de Post Rejeitou a palavra : ";
+		cout << endl << endl << "A Maquina de uma Pilha Rejeitou a palavra : ";
 	}
 
 	for (it = palavra.begin(); it < palavra.end(); it++) {
