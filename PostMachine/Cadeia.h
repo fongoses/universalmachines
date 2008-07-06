@@ -15,7 +15,7 @@ public:
 	
 	void setPalavra(vector<string>);
 	list<string> getPalavra();
-	
+	string getPalavraToString();
 	virtual ~Cadeia();
 	
 private:
