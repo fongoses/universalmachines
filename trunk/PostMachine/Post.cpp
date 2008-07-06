@@ -97,7 +97,7 @@ void Post::showPalavraEntrada() {
 
 void Post::showDelta() {
 	map<Entrada,Saida>::iterator it;
-	cout << "mymap contains:\n";
+	cout << "Funcao Programa da Maquina de POST:\n";
 	for (it = this->delta.begin() ; it != this->delta.end(); it++)
 		cout << "estado: " <<(*it).first.getEstado() << "   head: "<< (*it).first.getHead() << " => concatenar" << (*it).second.getConcatenar()<<"   proximo: "<< (*it).second.getProximoEstado()<< endl;
 }
