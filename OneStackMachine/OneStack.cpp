@@ -60,15 +60,16 @@ bool OneStack::isEmpty(typeQueue tipo) {
 	} else if (tipo == STACKONE) {
 		return (this->pilhaOne.empty());
 	}
-
 }
+
+
 void OneStack::insertDados(Entrada in, Saida out) {
 	this->delta.insert(pair<Entrada, Saida>(in, out) );
 }
 
 bool OneStack::executar() {
-	map<Entrada,Saida>::iterator it;
-	Entrada entrada("START", "~");
+/*	map<Entrada,Saida>::iterator it;
+	Entrada entrada("START", "~","~");
 	string cabeca = "";
 	string nextState = "";
 	while (true) {
@@ -102,8 +103,8 @@ bool OneStack::executar() {
 			cabeca = "@";
 		}
 		entrada = Entrada(nextState, cabeca);
-		cabeca = "";
-	}
+		cabeca = "";*/
+	//}
 	return false;
 }
 void OneStack::showPalavraEntrada() {

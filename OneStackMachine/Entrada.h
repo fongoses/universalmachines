@@ -4,19 +4,21 @@
 #include <list>
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Entrada {
+	
 public:
 	Entrada();
 	Entrada(string, string, string);
 
 	void setEstado(string);
-	void setHeadPilha(string);
 	void setHead(string);
+	void setHeadStack(int,string);
 
-	strin getHeadPilha() const;
+	string getHeadStack(int) const;
 	string getEstado() const;
 	string getHead()const;
 
@@ -26,8 +28,8 @@ public:
 	virtual ~Entrada();
 private:
 	string estado;
-	string headPilha;
 	string head;
+	vector<string> headStack;
 
 };
 

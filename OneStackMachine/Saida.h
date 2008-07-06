@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -15,11 +16,11 @@ public:
 	void setTail(bool);
 	void setConcatenar(string);
 	void setProximoEstado(string);
-	void setTailPilha(bool);
-	void setConcatenarPilha(string);
+	void setTailStack(int,bool);
+	void setConcatenarStack(int,string);
 	
-	bool isTailPilha() const;
-	string getConcatenarPilha() const;
+	bool isTailStack(int)const;
+	string getConcatenarStack(int)const;
 	bool isTail() const;
 	string getConcatenar() const;
 	string getProximoEstado() const;
@@ -30,10 +31,11 @@ public:
 
 private:
 	bool tail;
-	bool tailPilha;
+	vector<bool> tailStack;
 	string concatenar;
-	string concatenarPilha;
+	vector<string> concatenarStack;
 	string proximoEstado;
+	vector<string>  proximoEstadoStack;
 
 };
 
