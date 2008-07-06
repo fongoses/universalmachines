@@ -10,6 +10,7 @@
 #include "etc\Arquivo.h"
 #include "etc\stringUtils.h"
 #include "Post.h"
+#include "Alfabeto.h"
 #include <map>
 using namespace std;
 
@@ -39,27 +40,42 @@ int main(int argc, char *argv[]) {
 
 	Arquivo fileProgram;
 	Arquivo fileFila;
+	Arquivo fileAlfabeto;
 
 	Cadeia cadeia;
 
+	Alfabeto alfabeto;
+
 	Post maquinaPost;
 
-	char *programa, *fila;
+	char *programa;
+	char *fila;
+	char *alfa;
 
-	if (argc == 3) {
+	if (argc == 4) {
 		programa = argv[1];
 		fila = argv[2];
+		alfa = argv[3];
 		fileProgram.setEnd(programa);
 		fileFila.setEnd(fila);
+		fileAlfabeto.setEnd(alfa);
 	} else {
-		programa = "programa.txt";
-		fila = "fila.txt";
 		fileProgram.setEnd("programa.txt");
 		fileFila.setEnd("fila.txt");
+		fileAlfabeto.setEnd("alfabeto.txt");
 	}
 
 	fileProgram.abrir(fstream::in);
 	fileFila.abrir(fstream::in);
+	fileAlfabeto.abrir(fstream::in);
+
+	while (!fileAlfabeto.isTheEnd()) {
+		string line = fileAlfabeto.getLinha();
+		if (line.compare("") != 0) {
+			vector<string> linha = StringUtils::tokenize(line);
+			alfabeto.setAlfabeto(linha);
+		}
+	}
 
 	while (!fileFila.isTheEnd()) {
 		string line = fileFila.getLinha();
@@ -67,7 +83,18 @@ int main(int argc, char *argv[]) {
 			vector<string> linha = StringUtils::tokenize(line);
 			palavra = linha;
 			cadeia.setPalavra(linha);
-			maquinaPost.setPalavraEntrada(cadeia.getPalavra());
+			try {
+				if(alfabeto.isCaracterDoAlfabeto(linha)) {
+					maquinaPost.setPalavraEntrada(cadeia.getPalavra());
+				} else {
+					throw string("Algum caracter da cadeia "+cadeia.getPalavraToString()+" nao pertence ao alfabeto "+alfabeto.getAlfabeto());
+				}
+			} catch (string e) {
+				cout << endl << e << endl;
+				system("pause");
+				exit(1);
+			}
+
 		}
 	}
 
@@ -86,6 +113,7 @@ int main(int argc, char *argv[]) {
 
 			} catch (string s) {
 				cout << s << endl;
+				system("pause");
 				exit(1);
 			}
 
@@ -106,6 +134,7 @@ int main(int argc, char *argv[]) {
 
 	fileProgram.fechar();
 	fileFila.fechar();
+	fileAlfabeto.fechar();
 
 	system("pause");
 
