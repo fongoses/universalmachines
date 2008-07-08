@@ -35,7 +35,6 @@ private:
 	string concatenar;
 	vector<string> concatenarStack;
 	string proximoEstado;
-	vector<string>  proximoEstadoStack;
 
 };
 

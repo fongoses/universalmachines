@@ -8,6 +8,10 @@ Saida::~Saida() {
 
 Saida::Saida(string tail, string tailPilha, string concatenar,
 		string concatenarPilha, string proximoEstado) {
+	
+	this->concatenarStack = vector<string>(1);
+	this->tailStack = vector<bool>(1);
+	
 	if (tail.compare("tail") == 0) {
 		this->setTail(true);
 	} else {
