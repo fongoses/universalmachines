@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 
+#define PILHA 1
+
 using namespace std;
 
 class Entrada {

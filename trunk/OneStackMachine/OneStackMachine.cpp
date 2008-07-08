@@ -13,17 +13,22 @@
 #include <map>
 using namespace std;
 
-
 bool operator==(const Entrada& e1, const Entrada& e2) {
-	return (e1.estado==e2.estado)&&(e1.head==e2.head);
+	return (e1.estado==e2.estado)&&(e1.head==e2.head)&&(e1.headStack[0]
+			==e2.headStack[0]);
 }
 
 bool operator<(const Entrada& e1, const Entrada& e2) {
 	if (e1.estado<e2.estado)
 		return true;
 	else {
-		if ((e1.estado==e2.estado)&&(e1.head<e2.head))
+		if ((e1.estado==e2.estado)&&(e1.head<e2.head)&&(e1.headStack[0]
+				==e2.headStack[0]))
 			return true;
+		if ((e1.estado==e2.estado)&&(e1.head==e2.head)&&(e1.headStack[0]
+				<e2.headStack[0]))
+			return true;
+
 	}
 	return false;
 
@@ -31,7 +36,8 @@ bool operator<(const Entrada& e1, const Entrada& e2) {
 
 bool operator==(const Saida& s1, const Saida& s2) {
 	return (s1.tail==s2.tail)&&(s1.concatenar==s2.concatenar)
-			&&(s1.proximoEstado ==s2.proximoEstado);
+			&&(s1.proximoEstado ==s2.proximoEstado)&&(s1.tailStack[0]
+			==s2.tailStack[0])&&(s1.concatenarStack[0]==s2.concatenarStack[0]);
 }
 
 int main(int argc, char *argv[]) {
@@ -81,9 +87,9 @@ int main(int argc, char *argv[]) {
 				if(linha.size() != 8) {
 					throw string("Programa mal formado");
 				} else {
-					/*Entrada in(linha[0],linha[1],linha[2]);
+					Entrada in(linha[0],linha[1],linha[2]);
 					Saida out(linha[3],linha[4],linha[5],linha[6],linha[7]);
-					oneStack.insertDados(in,out);*/
+					oneStack.insertDados(in,out);
 				}
 
 			} catch (string s) {

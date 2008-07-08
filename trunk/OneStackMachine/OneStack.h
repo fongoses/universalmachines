@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <exception>
 #include "Entrada.h"
 #include "Saida.h"
 #include "Cadeia.h"
@@ -27,6 +28,7 @@ public:
 	void setPalavraEntrada(list<string>);
 	void insertDados(Entrada, Saida);
 	void showPalavraEntrada();
+	void showPilha(int);
 	void showDelta();
 	virtual ~OneStack();
 

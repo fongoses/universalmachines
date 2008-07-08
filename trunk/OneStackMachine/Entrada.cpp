@@ -9,6 +9,7 @@ Entrada::~Entrada() {
 Entrada::Entrada(string estado, string head, string headStackOne) {
 	this->setEstado(estado);
 	this->setHead(head);
+	this->headStack = vector<string>(1);
 	this->setHeadStack(0,headStackOne);
 }
 
