@@ -26,6 +26,7 @@ public:
 	string getProximoEstado() const;
 	
 	friend bool operator== (const Saida& s1, const Saida& s2);
+	friend bool operator< (const Saida& s1, const Saida& s2);
 	
 	virtual ~Saida();
 
