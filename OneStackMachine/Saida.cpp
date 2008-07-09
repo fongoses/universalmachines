@@ -8,10 +8,10 @@ Saida::~Saida() {
 
 Saida::Saida(string tail, string tailPilha, string concatenar,
 		string concatenarPilha, string proximoEstado) {
-	
+
 	this->concatenarStack = vector<string>(1);
 	this->tailStack = vector<bool>(1);
-	
+
 	if (tail.compare("tail") == 0) {
 		this->setTail(true);
 	} else {
@@ -19,12 +19,12 @@ Saida::Saida(string tail, string tailPilha, string concatenar,
 	}
 
 	if (tailPilha.compare("tail") == 0) {
-		this->setTailStack(0,true);
+		this->setTailStack(0, true);
 	} else {
-		this->setTailStack(0,false);
+		this->setTailStack(0, false);
 	}
 	this->setConcatenar(concatenar);
-	this->setConcatenarStack(0,concatenarPilha);
+	this->setConcatenarStack(0, concatenarPilha);
 	this->setProximoEstado(proximoEstado);
 }
 
@@ -40,19 +40,18 @@ void Saida::setProximoEstado(string proximoEstado) {
 	this->proximoEstado = proximoEstado;
 }
 
-
-void Saida::setTailStack(int stack ,bool tailStack){
+void Saida::setTailStack(int stack, bool tailStack) {
 	this->tailStack[stack] = tailStack;
 }
-void Saida::setConcatenarStack(int stack ,string concatenarStack){
+void Saida::setConcatenarStack(int stack, string concatenarStack) {
 	this->concatenarStack[stack] = concatenarStack;
 }
 
-bool Saida::isTailStack(int stack)const{
-	return(this->tailStack[stack]);
+bool Saida::isTailStack(int stack) const {
+	return (this->tailStack[stack]);
 }
-string Saida::getConcatenarStack(int stack)const{
-	return(this->concatenarStack[stack]);
+string Saida::getConcatenarStack(int stack) const {
+	return (this->concatenarStack[stack]);
 }
 
 bool Saida::isTail() const {
@@ -66,3 +65,10 @@ string Saida::getConcatenar() const {
 string Saida::getProximoEstado() const {
 	return (this->proximoEstado);
 }
+
+bool operator==(const Saida& s1, const Saida& s2) {
+	return ((s1.tail==s2.tail)&&(s1.concatenar==s2.concatenar)
+			&&(s1.proximoEstado ==s2.proximoEstado)&&(s1.tailStack[0]
+			==s2.tailStack[0])&&(s1.concatenarStack[0]==s2.concatenarStack[0]));
+}
+
