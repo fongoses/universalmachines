@@ -33,6 +33,9 @@ public:
 	virtual ~OneStack();
 
 private:
+	
+	void executarFila(Entrada,Saida);
+	voud executarPilhaOne(Entrada,Saida);
 
 	Cadeia cadeia;
 	map<Entrada,Saida> delta;

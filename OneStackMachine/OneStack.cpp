@@ -66,112 +66,141 @@ void OneStack::insertDados(Entrada in, Saida out) {
 	this->delta.insert(pair<Entrada, Saida>(in, out) );
 }
 
+void OneStack::executarFila(Entrada, Saida){
+	
+}
+voud OneStack::executarPilhaOne(Entrada, Saida){
+	
+}
+
 bool OneStack::executar() {
 	map<Entrada,Saida>::iterator it;
-	map<Entrada,Saida>::key_compare mycomp;
-	mycomp = this->delta.key_comp();
+	int tamanho = (int)this->delta.size();
 
-	Entrada highest=this->delta.rbegin()->first;
-	/*cout <<"ENTRADA: " <<"Estado Atual :" << highest.getEstado()
-			<<"    Cabeca: " << highest.getHead()<<"  CabecaPilha: "
-			<<highest.getHeadStack(0) << endl;*/
-
-	it = this->delta.begin();
-	try {
-		do {
-			Entrada in = (*it).first;
-			if ((in.getEstado().compare("q1")==0)&&(in.getHead().compare("a")==0)&&(in.getHeadStack(0).compare("~")==0)) {
-				Saida saida = (*it).second;
-				cout <<"SAIDA: " << "Concatenacao:" << saida.getConcatenar()
-				<<"  ConcatenacaoPilha: " <<saida.getConcatenarStack(0)
-				<<"     Proximo Estado: " << saida.getProximoEstado()<<endl
-				<<endl;
-			}
-		}while (mycomp((*it++).first, highest) );
-	} catch (...) {
-		cout << "ERRO DE EXECUCAO" << endl;
-		system("pause");
-		exit(1);
-	}
+	Entrada entrada("START", "~", "~");
 
 	/*
-	 Entrada entrada("q1", "a", "!");
-	 Saida saida = this->delta.find(entrada)->second;
+	 * variaveis auxiliares para ajudar na maquina
+	 */
+	string cabeca = "";
+	string cabecaPilha = "";
+	string nextState = "";
+	bool isFila = false;
+	bool isStackOne = false;
 
-	 cout <<"ENTRADA: " <<"Estado Atual :" << entrada.getEstado()
-	 <<"    Cabeca: " << entrada.getHead()<<"  CabecaPilha: "
-	 <<entrada.getHeadStack(0) << endl;
+	while (true) {
+		try {
+			isFila = false;
+			isStackOne = false;
+			
+			this->showPalavraEntrada();
+			this->showPilha(0);
+			cout << endl;
 
-	 cout <<"SAIDA: " << "Concatenacao:" << saida.getConcatenar()
-	 <<"  ConcatenacaoPilha: " <<saida.getConcatenarStack(0)
-	 <<"     Proximo Estado: " << saida.getProximoEstado()<<endl <<endl;*/
+			Saida saida("","","","","");
 
-	/*Entrada entrada("START", "~", "~");
-	 string cabeca = "";
-	 string cabecaPilha = "~";
-	 string nextState = "";
-	 while (true) {
-	 try {
-	 this->showPalavraEntrada();
-	 this->showPilha(0);
-	 cout << endl;
+			it = this->delta.begin();
 
-	 //Saida saida = this->delta[entrada];
-	 Saida saida = this->delta.find(entrada)->second;
+			/*
+			 * faz a procura na map, 
+			 * a funcao find nao estava funfando!!!!
+			 */
+			try {
+				int i = 1;
+				for (it = this->delta.begin(); it != this->delta.end(); it++ ) {
+					if (((*it).first.getEstado().compare(entrada.getEstado())==0)&&((*it).first.getHead().compare(entrada.getHead())==0)&&((*it).first.getHeadStack(0).compare(entrada.getHeadStack(0))==0)) {
+						saida = (*it).second;
+						if(((*it).first.getHead().compare("~") == 0)&&((*it).first.getHeadStack(0).compare("~") != 0)){
+							isFila = true;
+						}else if(((*it).first.getHead().compare("~") != 0)&&((*it).first.getHeadStack(0).compare("~") == 0)){
+							isStackOne = true;
+						}
+						break;
+					} else if(i >= tamanho) {
+						cout << endl;
+						cout << "ENTRANDA NAO EXISTENTE: " <<endl << endl;
+						cout << "ESTADO: "<< entrada.getEstado() <<endl;
+						cout << "CABECA: "<< entrada.getHead() <<endl;
+						cout << "CABECA PILHA: "<< entrada.getHeadStack(0) << endl;
+						throw string("\nERRO NA PROCURA NA MAP");
+					}
+					i++;
+				}
 
-	 cout << "Estado Atual :" << entrada.getEstado() <<"    Cabeca: "
-	 << entrada.getHead()<<"  CabecaPilha: "
-	 <<entrada.getHeadStack(0) << endl;
+			} catch (string s) {
+				cout << s << endl;
+				system("pause");
+				exit(1);
+			}
 
-	 cout << "Concatenacao:" << saida.getConcatenar()
-	 <<"  ConcatenacaoPilha: "<<saida.getConcatenarStack(0)
-	 <<"     Proximo Estado: " << saida.getProximoEstado()<<endl
-	 <<endl;
+			cout << "Estado Atual :" << entrada.getEstado() <<"    Cabeca: "
+			<< entrada.getHead()<<"  CabecaPilha: "
+			<<entrada.getHeadStack(0) << endl;
 
-	 cout <<"---------------------------------------------------------"<<endl;
-	 if (saida.isTail()) {
-	 this->tail(FILA);
-	 }
-	 if (saida.isTailStack(0)) {
-	 this->tail(STACKONE);
-	 }
-	 if (saida.getConcatenar().compare("~") != 0) {
-	 this->concatenarEnd(saida.getConcatenar(), FILA);
-	 }
-	 if (saida.getConcatenarStack(0).compare("~") != 0) {
-	 this->concatenarBegin(saida.getConcatenarStack(0), STACKONE);
-	 }
-	 if (saida.getProximoEstado().compare("ACCEPT") == 0) {
-	 return true;
-	 } else if (saida.getProximoEstado().compare("REJECT") == 0) {
-	 return false;
-	 } else {
-	 nextState = saida.getProximoEstado();
-	 }
-	 if(entrada.getHead().compare("~") != 0){
-	 cabeca = this->head(FILA);
-	 }
-	 if(entrada.getHeadStack(0).compare("~") != 0){
-	 cabecaPilha = this->head(STACKONE);
-	 }
-	 
-	 if (cabeca.compare("") == 0) {
-	 cabeca = "@";
-	 }
-	 if (cabecaPilha.compare("") == 0) {
-	 cabecaPilha = "@";
-	 }
-	 entrada = Entrada(nextState, cabeca, cabecaPilha);
-	 cabeca = "";
-	 cabecaPilha = "";
-	 } catch (...) {
-	 cout << "ERRO DE EXECUCAO" << endl;
-	 system("pause");
-	 exit(1);
-	 }
+			cout << "Concatenacao:" << saida.getConcatenar()
+			<<"  ConcatenacaoPilha: "<<saida.getConcatenarStack(0)
+			<<"     Proximo Estado: " << saida.getProximoEstado()<<endl
+			<<endl;
 
-	 }
-	 */return false;
+			cout <<"---------------------------------------------------------"<<endl;
+
+			if(isFila){
+				this->executarFila(entrada,saida);
+			}else if(isStackOne){
+				this->executarPilhaOne(entrada,saida);
+			}
+			
+			
+			
+			if (saida.isTail()) {
+				this->tail(FILA);
+			}
+			if (saida.isTailStack(0)) {
+				this->tail(STACKONE);
+			}
+			if (saida.getConcatenar().compare("~") != 0) {
+				this->concatenarEnd(saida.getConcatenar(), FILA);
+			}
+			if (saida.getConcatenarStack(0).compare("~") != 0) {
+				this->concatenarBegin(saida.getConcatenarStack(0), STACKONE);
+			}
+			if (saida.getProximoEstado().compare("ACCEPT") == 0) {
+				return true;
+			} else if (saida.getProximoEstado().compare("REJECT") == 0) {
+				return false;
+			} else {
+				nextState = saida.getProximoEstado();
+			}
+
+			if((entrada.getHead().compare("~") == 0)&&(entrada.getHeadStack(0).compare("~") != 0)) {
+				cabecaPilha = this->head(STACKONE);
+				cabeca = "~";
+			} else if((entrada.getHead().compare("~") != 0)&&(entrada.getHeadStack(0).compare("~") == 0)) {
+				cabeca = this->head(FILA);
+				cabecaPilha = "~";
+			} else if((entrada.getHead().compare("~") == 0)&&(entrada.getHeadStack(0).compare("~") == 0)) {
+				cabeca = this->head(FILA);
+				cabecaPilha = "~";
+			}
+
+			if (cabeca.compare("") == 0) {
+				cabeca = "@";
+			}
+			if (cabecaPilha.compare("") == 0) {
+				cabecaPilha = "@";
+			}
+
+			entrada = Entrada(nextState, cabeca, cabecaPilha);
+			cabeca = "";
+			cabecaPilha = "";
+		} catch (...) {
+			cout << "ERRO DE EXECUCAO" << endl;
+			system("pause");
+			exit(1);
+		}
+
+	}
+	return false;
 }
 void OneStack::showPalavraEntrada() {
 	list<string>::iterator it;
