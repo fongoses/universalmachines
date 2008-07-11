@@ -34,9 +34,7 @@ public:
 
 private:
 	
-	void executarFila(Entrada,Saida);
-	voud executarPilhaOne(Entrada,Saida);
-
+	void lookAhead(Entrada,Saida,bool*,bool*);
 	Cadeia cadeia;
 	map<Entrada,Saida> delta;
 	bool isEmpty(typeQueue);

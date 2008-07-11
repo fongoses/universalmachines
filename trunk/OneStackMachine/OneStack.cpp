@@ -66,13 +66,6 @@ void OneStack::insertDados(Entrada in, Saida out) {
 	this->delta.insert(pair<Entrada, Saida>(in, out) );
 }
 
-void OneStack::executarFila(Entrada, Saida){
-	
-}
-voud OneStack::executarPilhaOne(Entrada, Saida){
-	
-}
-
 bool OneStack::executar() {
 	map<Entrada,Saida>::iterator it;
 	int tamanho = (int)this->delta.size();
@@ -92,7 +85,7 @@ bool OneStack::executar() {
 		try {
 			isFila = false;
 			isStackOne = false;
-			
+
 			this->showPalavraEntrada();
 			this->showPilha(0);
 			cout << endl;
@@ -110,13 +103,9 @@ bool OneStack::executar() {
 				for (it = this->delta.begin(); it != this->delta.end(); it++ ) {
 					if (((*it).first.getEstado().compare(entrada.getEstado())==0)&&((*it).first.getHead().compare(entrada.getHead())==0)&&((*it).first.getHeadStack(0).compare(entrada.getHeadStack(0))==0)) {
 						saida = (*it).second;
-						if(((*it).first.getHead().compare("~") == 0)&&((*it).first.getHeadStack(0).compare("~") != 0)){
-							isFila = true;
-						}else if(((*it).first.getHead().compare("~") != 0)&&((*it).first.getHeadStack(0).compare("~") == 0)){
-							isStackOne = true;
-						}
+						this->lookAhead(entrada,saida,&isStackOne,&isFila);
 						break;
-					} else if(i >= tamanho) {
+					} else if(i > tamanho) {
 						cout << endl;
 						cout << "ENTRANDA NAO EXISTENTE: " <<endl << endl;
 						cout << "ESTADO: "<< entrada.getEstado() <<endl;
@@ -144,14 +133,6 @@ bool OneStack::executar() {
 
 			cout <<"---------------------------------------------------------"<<endl;
 
-			if(isFila){
-				this->executarFila(entrada,saida);
-			}else if(isStackOne){
-				this->executarPilhaOne(entrada,saida);
-			}
-			
-			
-			
 			if (saida.isTail()) {
 				this->tail(FILA);
 			}
@@ -172,15 +153,26 @@ bool OneStack::executar() {
 				nextState = saida.getProximoEstado();
 			}
 
-			if((entrada.getHead().compare("~") == 0)&&(entrada.getHeadStack(0).compare("~") != 0)) {
+			/*	if((entrada.getHead().compare("~") == 0)&&(entrada.getHeadStack(0).compare("~") != 0)) {
+			 cabecaPilha = this->head(STACKONE);
+			 cabeca = "~";
+			 } else if((entrada.getHead().compare("~") != 0)&&(entrada.getHeadStack(0).compare("~") == 0)) {
+			 cabeca = this->head(FILA);
+			 cabecaPilha = "~";
+			 } else if((entrada.getHead().compare("~") == 0)&&(entrada.getHeadStack(0).compare("~") == 0)) {
+			 cabeca = this->head(FILA);
+			 cabecaPilha = "~";
+			 }*/
+
+			if(isFila) {
+
+				cabeca = this->head(FILA);
+				cabecaPilha = "~";
+
+			} else if(isStackOne) {
+
 				cabecaPilha = this->head(STACKONE);
 				cabeca = "~";
-			} else if((entrada.getHead().compare("~") != 0)&&(entrada.getHeadStack(0).compare("~") == 0)) {
-				cabeca = this->head(FILA);
-				cabecaPilha = "~";
-			} else if((entrada.getHead().compare("~") == 0)&&(entrada.getHeadStack(0).compare("~") == 0)) {
-				cabeca = this->head(FILA);
-				cabecaPilha = "~";
 			}
 
 			if (cabeca.compare("") == 0) {
@@ -191,6 +183,7 @@ bool OneStack::executar() {
 			}
 
 			entrada = Entrada(nextState, cabeca, cabecaPilha);
+
 			cabeca = "";
 			cabecaPilha = "";
 		} catch (...) {
@@ -201,6 +194,37 @@ bool OneStack::executar() {
 
 	}
 	return false;
+}
+void OneStack::lookAhead(Entrada entrada, Saida saida, bool *isStackOne,
+		bool *isFila) {
+	map<Entrada,Saida>::iterator it;
+	int tamanho = (int)this->delta.size();
+	try {
+		int i = 1;
+		for (it = this->delta.begin(); it != this->delta.end(); it++ ) {
+			if (((*it).first.getEstado().compare(saida.getProximoEstado())==0)) {
+				if(((*it).first.getHead().compare("~") == 0)&&((*it).first.getHeadStack(0).compare("~") != 0)) {
+					*isStackOne = true;
+				} else if(((*it).first.getHead().compare("~") != 0)&&((*it).first.getHeadStack(0).compare("~") == 0)) {
+					*isFila = true;
+				}
+				break;
+			} else if(i > tamanho) {
+				cout << endl;
+				cout << "LOOK AHEAD FALHOU: " <<endl << endl;
+				cout << "ESTADO: "<< entrada.getEstado() <<endl;
+				cout << "CABECA: "<< entrada.getHead() <<endl;
+				cout << "CABECA PILHA: "<< entrada.getHeadStack(0) << endl;
+				throw string("\nERRO NA PROCURA NA MAP");
+			}
+			i++;
+		}
+
+	} catch (string s) {
+		cout << s << endl;
+		system("pause");
+		exit(1);
+	}
 }
 void OneStack::showPalavraEntrada() {
 	list<string>::iterator it;
