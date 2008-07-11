@@ -9,6 +9,7 @@
 #include "Entrada.h"
 #include "Saida.h"
 #include "Cadeia.h"
+#include "etc\Arquivo.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ public:
 	void showPalavraEntrada();
 	void showPilha(int);
 	void showDelta();
+	void setFileOut(Arquivo*);
 	virtual ~OneStack();
 
 private:
@@ -40,6 +42,7 @@ private:
 	bool isEmpty(typeQueue);
 	list<string> palavraEntrada;
 	list<string> pilhaOne;
+	Arquivo *fileOut;
 };
 
 #endif /*ONESTACK_H_*/

@@ -18,3 +18,12 @@ void Cadeia::setPalavra(vector<string> str) {
 list<string> Cadeia::getPalavra() {
 	return (this->palavra);
 }
+
+string Cadeia::getPalavraToString(){
+	 list<string>::iterator it;
+	 string word = "\"";
+	 for (it = this->palavra.begin(); it != this->palavra.end(); it++){
+		 word += *it;
+	 }
+	 return(word += "\"");
+}
