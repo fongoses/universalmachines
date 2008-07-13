@@ -1,0 +1,69 @@
+********************************************************************************** 
+*Alunos:     Pedro Sanches Junior                                                * 
+*            Thiago Augusto Lopes Genez                                          * 
+*                                                                                * 
+*Professora: Maria Angelica Brunetto                                             * 
+*                                                                                * 
+*Disciplina: Teoria da Computcao                                                 * 
+********************************************************************************** 
+
+---------------------------------------------------------------------------------- 
+|    S I M U L A D O R     D A     M A Q U I N A     D E     2  P I L H A          |
+|__________________________________________________________________________________|
+
+
+Funcao Programa da Maquina de 1 PILHA:
+
+estado: START   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q1
+estado: q1   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q3
+estado: q1   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:a   concatenar Pilha 2:~   proximo: q1
+estado: q1   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q2
+estado: q2   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q2   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:b   proximo: q4
+estado: q2   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q3   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: ACCEPT
+estado: q3   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q3   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q4   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q4   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q5
+estado: q4   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q2
+estado: q5   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q6
+estado: q5   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q5   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q6   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q6   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q6   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q7
+estado: q7   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q8
+estado: q7   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q6
+estado: q7   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q8   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: ACCEPT
+estado: q8   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q8   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+---------------------------------------------------------------------------------- 
+
+
+
+Resultado Parcial : bab
+Pilha1: vazia
+Pilha2: vazia
+Estado Atual :START    Cabeca: ~  CabecaPilha 1: ~  CabecaPilha 2: ~
+Concatenacao:~  ConcatenacaoPilha 1: ~  ConcatenacaoPilha 2: ~     Proximo Estado: q1
+
+---------------------------------------------------------------------------------- 
+Resultado Parcial : bab
+Pilha1: vazia
+Pilha2: vazia
+Estado Atual :q1    Cabeca: b  CabecaPilha 1: ~  CabecaPilha 2: ~
+Concatenacao:~  ConcatenacaoPilha 1: ~  ConcatenacaoPilha 2: ~     Proximo Estado: q2
+
+---------------------------------------------------------------------------------- 
+Resultado Parcial : ab
+Pilha1: vazia
+Pilha2: vazia
+Estado Atual :q2    Cabeca: ~  CabecaPilha 1: @  CabecaPilha 2: ~
+Concatenacao:~  ConcatenacaoPilha 1: ~  ConcatenacaoPilha 2: ~     Proximo Estado: REJECT
+
+---------------------------------------------------------------------------------- 
+
+
+A Maquina de 2 Pilhas REJEITOU a palavra : bab
