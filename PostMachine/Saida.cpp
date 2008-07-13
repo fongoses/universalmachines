@@ -39,3 +39,9 @@ string Saida::getConcatenar() const{
 string Saida::getProximoEstado()const{
 	return(this->proximoEstado);
 }
+
+bool operator==(const Saida& s1, const Saida& s2) {
+	return (s1.tail==s2.tail)&&(s1.concatenar==s2.concatenar)
+			&&(s1.proximoEstado ==s2.proximoEstado);
+}
+
