@@ -129,7 +129,11 @@ int main(int argc, char *argv[]) {
 	for (it = palavra.begin(); it < palavra.end(); it++) {
 		word += *it;
 	}
-	fileOut.write(word);
+	if (word.size() == 0) {
+		fileOut.write("\"palavra vazia\"");
+	} else {
+		fileOut.write(word);
+	}
 
 	fileProgram.fechar();
 	fileFila.fechar();
