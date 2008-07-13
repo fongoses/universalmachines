@@ -14,25 +14,6 @@
 #include <map>
 using namespace std;
 
-bool operator==(const Saida& s1, const Saida& s2) {
-	return (s1.tail==s2.tail)&&(s1.concatenar==s2.concatenar)
-			&&(s1.proximoEstado ==s2.proximoEstado);
-}
-bool operator==(const Entrada& e1, const Entrada& e2) {
-	return (e1.estado==e2.estado)&&(e1.head==e2.head);
-}
-
-bool operator<(const Entrada& e1, const Entrada& e2) {
-	if (e1.estado<e2.estado)
-		return true;
-	else {
-		if ((e1.estado==e2.estado)&&(e1.head<e2.head))
-			return true;
-	}
-	return false;
-
-}
-
 int main(int argc, char *argv[]) {
 
 	vector<string> palavra;
@@ -41,6 +22,7 @@ int main(int argc, char *argv[]) {
 	Arquivo fileProgram;
 	Arquivo fileFila;
 	Arquivo fileAlfabeto;
+	Arquivo fileOut;
 
 	Cadeia cadeia;
 
@@ -51,23 +33,30 @@ int main(int argc, char *argv[]) {
 	char *programa;
 	char *fila;
 	char *alfa;
+	char *out;
 
-	if (argc == 4) {
+	if (argc == 5) {
 		programa = argv[1];
 		fila = argv[2];
 		alfa = argv[3];
+		out = argv[4];
 		fileProgram.setEnd(programa);
 		fileFila.setEnd(fila);
 		fileAlfabeto.setEnd(alfa);
+		fileOut.setEnd(out);
 	} else {
 		fileProgram.setEnd("programa.txt");
 		fileFila.setEnd("fila.txt");
 		fileAlfabeto.setEnd("alfabeto.txt");
+		fileOut.setEnd("saida.txt");
 	}
 
 	fileProgram.abrir(fstream::in);
 	fileFila.abrir(fstream::in);
 	fileAlfabeto.abrir(fstream::in);
+	fileOut.abrir(fstream::out);
+
+	maquinaPost.setFileOut(&fileOut);
 
 	while (!fileAlfabeto.isTheEnd()) {
 		string line = fileAlfabeto.getLinha();
@@ -119,24 +108,41 @@ int main(int argc, char *argv[]) {
 
 		}
 	}
-	cout << "Programa da Maquina Post: " << endl << endl;
+
+	fileOut.write("********************************************************************************** \n");
+	fileOut.write("*Alunos:     Pedro Sanches Junior                                                * \n");
+	fileOut.write("*            Thiago Augusto Lopes Genez                                          * \n");
+	fileOut.write("*                                                                                * \n");
+	fileOut.write("*Professora: Maria Angelica Brunetto                                             * \n");
+	fileOut.write("*                                                                                * \n");
+	fileOut.write("*Disciplina: Teoria da Computcao                                                 * \n");
+	fileOut.write("********************************************************************************** \n\n");
+	fileOut.write("---------------------------------------------------------------------------------- \n");
+	fileOut.write("|    S I M U L A D O R     D A     M A Q U I N A     D E     P O S T               |\n");
+	fileOut.write("|__________________________________________________________________________________|\n\n\n");
+
 	maquinaPost.showDelta();
+
 	if (maquinaPost.executar()) {
-		cout << endl << endl <<"A maquina de Post Aceitou a palavra: ";
+		fileOut.write("\n\nA maquina de Post ACEITOU a palavra: ");
 	} else {
-		cout << endl << endl << "A maquina de Post Rejeitou a palavra : ";
+		fileOut.write("\n\nA maquina de Post REJEITOU a palavra: ");
 	}
 
+	string word = "";
 	for (it = palavra.begin(); it < palavra.end(); it++) {
-		cout <<*it;
+		word += *it;
 	}
-	cout << endl << endl;
+	if (word.size() == 0) {
+		fileOut.write("\"palavra vazia\"");
+	} else {
+		fileOut.write(word);
+	}
 
 	fileProgram.fechar();
 	fileFila.fechar();
 	fileAlfabeto.fechar();
-
-	system("pause");
+	fileOut.fechar();
 
 	return 0;
 }

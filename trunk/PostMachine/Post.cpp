@@ -1,14 +1,16 @@
 #include "Post.h"
 
 Post::Post() {
+	this->fileOut = NULL;
 }
 
 Post::~Post() {
+
 }
 
 void Post::tail() {
-	if(!this->isEmpty()){
-		this->palavraEntrada.pop_front();	
+	if (!this->isEmpty()) {
+		this->palavraEntrada.pop_front();
 	}
 }
 
@@ -37,8 +39,6 @@ bool Post::isEmpty() {
 }
 void Post::insertDados(Entrada in, Saida out) {
 	this->delta.insert(pair<Entrada, Saida>(in, out) );
-	/*this->deltaEntrada.push_back(in);
-	 this->deltaSaida.push_back(out);*/
 }
 
 bool Post::executar() {
@@ -48,18 +48,18 @@ bool Post::executar() {
 	string nextState = "";
 	while (true) {
 		this->showPalavraEntrada();
-	
-		
+
 		Saida saida = this->delta[entrada];
 
-		cout << "Estado Atual :" << entrada.getEstado() <<"    Cabeca: "
-				<< entrada.getHead()<<endl;
+		this->fileOut->write("Estado Atual :" + entrada.getEstado()
+				+"    Cabeca: " + entrada.getHead() + "\n");
 
-		cout << "Concatenacao:" << saida.getConcatenar()
-				<<"     Proximo Estado: " << saida.getProximoEstado()<<endl;
+		this->fileOut->write("Concatenacao:" + saida.getConcatenar()
+				+ "     Proximo Estado: " + saida.getProximoEstado() + "\n");
+
+		this->fileOut->write("---------------------------------------------------------------------------------- \n");
 
 		if (saida.isTail()) {
-			//cabeca = this->head();
 			this->tail();
 		}
 		if (saida.getConcatenar().compare("~") != 0) {
@@ -71,10 +71,10 @@ bool Post::executar() {
 			return false;
 		} else {
 			nextState = saida.getProximoEstado();
-			cout << "nextstate " << nextState <<endl<<endl;
 		}
+
 		cabeca = this->head();
-		if(cabeca.compare("") == 0){
+		if (cabeca.compare("") == 0) {
 			cabeca = "@";
 		}
 		entrada = Entrada(nextState, cabeca);
@@ -84,20 +84,30 @@ bool Post::executar() {
 }
 void Post::showPalavraEntrada() {
 	list<string>::iterator it;
-	cout<<"Resultado Parcial : ";
-	if(!this->palavraEntrada.empty()){
-		for (it = this->palavraEntrada.begin(); it != this->palavraEntrada.end(); it++){
-			cout << *it;			
+	this->fileOut->write("Resultado Parcial : ");
+	string word = "";
+	if (!this->palavraEntrada.empty()) {
+		for (it = this->palavraEntrada.begin(); it
+				!= this->palavraEntrada.end(); it++) {
+			word += *it;
 		}
-	}else{
-		cout << " vazia";
+	} else {
+		word = " vazia";
 	}
-	cout << endl;
+	this->fileOut->write(word + "\n");
 }
 
 void Post::showDelta() {
 	map<Entrada,Saida>::iterator it;
-	cout << "Funcao Programa da Maquina de POST:\n";
-	for (it = this->delta.begin() ; it != this->delta.end(); it++)
-		cout << "estado: " <<(*it).first.getEstado() << "   head: "<< (*it).first.getHead() << " => concatenar" << (*it).second.getConcatenar()<<"   proximo: "<< (*it).second.getProximoEstado()<< endl;
+	this->fileOut->write("Funcao Programa da Maquina de POST:\n");
+	for (it = this->delta.begin() ; it != this->delta.end(); it++) {
+		this->fileOut->write("Estado: " + (*it).first.getEstado() + "       Head: " + (*it).first.getHead() + "     =>     Concatenar" + (*it).second.getConcatenar() + "    Proximo Estado:  " + (*it).second.getProximoEstado() + "\n");
+	}
+
+	this->fileOut->write("---------------------------------------------------------------------------------- \n");
+	this->fileOut->write("\n\n\n");
+}
+
+void Post::setFileOut(Arquivo* fileOut) {
+	this->fileOut = fileOut;
 }

@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include "etc\Arquivo.h"
 #include "Entrada.h"
 #include "Saida.h"
 #include "Cadeia.h"
@@ -24,6 +25,7 @@ public:
 	void insertDados(Entrada, Saida);
 	void showPalavraEntrada();
 	void showDelta();
+	void setFileOut(Arquivo*);
 	virtual ~Post();
 
 private:
@@ -32,11 +34,8 @@ private:
 	map<Entrada,Saida> delta;
 	bool isEmpty();
 	list<string> palavraEntrada;
-	
-	/*list<Entrada> deltaEntrada;
-	list<Saida> deltaSaida;
-	list<Entrada>::iterator itIn;
-	list<Saida>::iterator itOut;*/
+	Arquivo *fileOut;
+
 };
 
 #endif /*POST_H_*/
