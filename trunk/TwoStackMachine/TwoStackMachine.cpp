@@ -119,11 +119,11 @@ int main(int argc, char *argv[]) {
 
 	twoStack.showDelta();
 
-	/*if (twoStack.executar()) {
-		fileOut.write("\n\nA Maquina de uma Pilha ACEITOU a palavra: ");
+	if (twoStack.executar()) {
+		fileOut.write("\n\nA Maquina de 2 Pilhas ACEITOU a palavra: ");
 	} else {
-		fileOut.write("\n\nA Maquina de uma Pilha REJEITOU a palavra : ");
-	}*/
+		fileOut.write("\n\nA Maquina de 2 Pilhas REJEITOU a palavra : ");
+	}
 
 	string word = "";
 	for (it = palavra.begin(); it < palavra.end(); it++) {

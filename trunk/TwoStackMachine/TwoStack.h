@@ -10,6 +10,10 @@
 #include "Saida.h"
 #include "Cadeia.h"
 #include "etc\Arquivo.h"
+#include <sstream>
+
+
+using namespace std;
 
 enum typeQueue {
 	FILA,STACKONE,STACKTWO
@@ -26,20 +30,21 @@ public:
 	void setPalavraEntrada(list<string>);
 	void insertDados(Entrada, Saida);
 	void showPalavraEntrada();
-	void showPilha(int);
+	void showPilha(int,list<string>);
 	void showDelta();
 	void setFileOut(Arquivo*);
 	virtual ~TwoStack();
 
 private:
 
-	void lookAhead(Entrada, Saida, bool*, bool*);
+	void lookAhead(Entrada, Saida, bool*, bool*,bool*);
 	Cadeia cadeia;
 	map<Entrada,Saida> delta;
 	bool isEmpty(typeQueue);
 	list<string> palavraEntrada;
 	list<string> pilhaOne;
 	list<string> pilhaTwo;
+	string IntToString(int); 
 	Arquivo *fileOut;
 };
 
