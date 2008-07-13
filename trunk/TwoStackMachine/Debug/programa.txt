@@ -1,0 +1,33 @@
+START ~ ~ ~ ~ ~ ~ ~ ~ ~ q1
+
+q1 a ~ ~ tail ~ ~ ~ a ~ q1
+q1 b ~ ~ tail ~ ~ ~ ~ ~ q2
+q1 @ ~ ~ tail ~ ~ ~ ~ ~ q3
+
+q2 ~ a ~ ~ tail ~ ~ ~ b q4
+q2 ~ b ~ ~ tail ~ ~ ~ ~ REJECT
+q2 ~ @ ~ ~ tail ~ ~ ~ ~ REJECT
+
+q3 ~ a ~ ~ tail ~ ~ ~ ~ REJECT
+q3 ~ b ~ ~ tail ~ ~ ~ ~ REJECT
+q3 ~ @ ~ ~ tail ~ ~ ~ ~ ACCEPT
+
+q4 a ~ ~ tail ~ ~ ~ ~ ~ q5
+q4 b ~ ~ tail ~ ~ ~ ~ ~ q2
+q4 @ ~ ~ tail ~ ~ ~ ~ ~ REJECT
+
+q5 ~ a ~ ~ tail ~ ~ ~ ~ REJECT
+q5 ~ b ~ ~ tail ~ ~ ~ ~ REJECT
+q5 ~ @ ~ ~ tail ~ ~ ~ ~ q6
+
+q6 ~ ~ a ~ ~ tail ~ ~ ~ REJECT
+q6 ~ ~ b ~ ~ tail ~ ~ ~ q7
+q6 ~ ~ @ ~ ~ tail ~ ~ ~ REJECT
+
+q7 a ~ ~ tail ~ ~ ~ ~ ~ q6
+q7 b ~ ~ tail ~ ~ ~ ~ ~ REJECT
+q7 @ ~ ~ tail ~ ~ ~ ~ ~ q8
+
+q8 ~ ~ a ~ ~ tail ~ ~ ~ REJECT
+q8 ~ ~ b ~ ~ tail ~ ~ ~ REJECT
+q8 ~ ~ @ ~ ~ tail ~ ~ ~ ACCEPT
