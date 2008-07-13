@@ -1,0 +1,16 @@
+START ~ ~ # q1
+
+q1 a tail ~ q2
+q1 b tail ~ REJECT
+q1 @ tail ~ REJECT
+q1 # tail ~ ACCEPT
+
+q2 a tail a q2
+q2 b tail ~ q3
+q2 @ tail ~ REJECT
+q2 # tail ~ REJECT
+
+q3 a tail ~ REJECT
+q3 b tail b q3
+q3 @ tail ~ REJECT
+q3 # tail # q1
