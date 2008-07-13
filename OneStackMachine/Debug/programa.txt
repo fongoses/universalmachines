@@ -1,0 +1,19 @@
+START ~ ~ ~ ~ ~ ~ q1
+
+q1 a ~ tail ~ ~ a q1
+q1 b ~ tail ~ ~ ~ q2
+q1 @ ~ tail ~ ~ ~ q4
+
+q2 ~ a ~ tail ~ ~ q3
+q2 ~ b ~ tail ~ ~ REJECT
+q2 ~ @ ~ tail ~ ~ REJECT
+
+q3 a ~ tail ~ ~ ~ REJECT
+q3 b ~ tail ~ ~ ~ q2
+q3 @ ~ tail ~ ~ ~ q4
+
+q4 ~ a ~ tail ~ ~ REJECT
+q4 ~ b ~ tail ~ ~ REJECT
+q4 ~ @ ~ tail ~ ~ ACCEPT
+
+
