@@ -1,0 +1,54 @@
+********************************************************************************** 
+*Alunos:     Pedro Sanches Junior                                                * 
+*            Thiago Augusto Lopes Genez                                          * 
+*                                                                                * 
+*Professora: Maria Angelica Brunetto                                             * 
+*                                                                                * 
+*Disciplina: Teoria da Computcao                                                 * 
+********************************************************************************** 
+
+---------------------------------------------------------------------------------- 
+|    S I M U L A D O R     D A     M A Q U I N A     D E     1 P I L H A           |
+|__________________________________________________________________________________|
+
+
+Funcao Programa da Maquina de 1 PILHA:
+
+estado: START   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha:~   proximo: q1
+estado: q1   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha:~   proximo: q4
+estado: q1   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha:a   proximo: q1
+estado: q1   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha:~   proximo: q2
+estado: q2   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha:~   proximo: REJECT
+estado: q2   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha:~   proximo: q3
+estado: q2   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha:~   proximo: REJECT
+estado: q3   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha:~   proximo: q4
+estado: q3   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha:~   proximo: REJECT
+estado: q3   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha:~   proximo: q2
+estado: q4   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha:~   proximo: ACCEPT
+estado: q4   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha:~   proximo: REJECT
+estado: q4   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha:~   proximo: REJECT
+---------------------------------------------------------------------------------- 
+
+
+
+Resultado Parcial : vazia
+Pilha: vazia
+Estado Atual :START    Cabeca: ~  CabecaPilha: ~
+Concatenacao:~  ConcatenacaoPilha: ~     Proximo Estado: q1
+
+---------------------------------------------------------------------------------- 
+Resultado Parcial : vazia
+Pilha: vazia
+Estado Atual :q1    Cabeca: @  CabecaPilha: ~
+Concatenacao:~  ConcatenacaoPilha: ~     Proximo Estado: q4
+
+---------------------------------------------------------------------------------- 
+Resultado Parcial : vazia
+Pilha: vazia
+Estado Atual :q4    Cabeca: ~  CabecaPilha: @
+Concatenacao:~  ConcatenacaoPilha: ~     Proximo Estado: ACCEPT
+
+---------------------------------------------------------------------------------- 
+
+
+A Maquina de uma Pilha ACEITOU a palavra: "palavra vazia"
