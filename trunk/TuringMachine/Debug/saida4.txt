@@ -1,0 +1,229 @@
+********************************************************************************** 
+*Alunos:     Pedro Sanches Junior                                                * 
+*            Thiago Augusto Lopes Genez                                          * 
+*                                                                                * 
+*Professora: Maria Angelica Brunetto                                             * 
+*                                                                                * 
+*Disciplina: Teoria da Computcao                                                 * 
+********************************************************************************** 
+
+---------------------------------------------------------------------------------- 
+|    S I M U L A D O R     D A     M A Q U I N A     D E     T U R I N G           |
+|__________________________________________________________________________________|
+
+
+Funcao Programa da Maquina de TURING:
+
+
+Estado Inicial: q0
+Estado(s) Finais: qf,
+
+Estado: q0       Leitura Simbolo: #     =>     Estado Destino: q1    Simbolo Escrito: S     Movimento: RIGHT
+Estado: q0       Leitura Simbolo: 0     =>     Estado Destino: q0    Simbolo Escrito: 0     Movimento: RIGHT
+Estado: q0       Leitura Simbolo: B     =>     Estado Destino: qf    Simbolo Escrito: B     Movimento: LEFT
+Estado: q1       Leitura Simbolo: #     =>     Estado Destino: q1    Simbolo Escrito: #     Movimento: RIGHT
+Estado: q1       Leitura Simbolo: 0     =>     Estado Destino: q1    Simbolo Escrito: 0     Movimento: RIGHT
+Estado: q1       Leitura Simbolo: 1     =>     Estado Destino: q1    Simbolo Escrito: 1     Movimento: RIGHT
+Estado: q1       Leitura Simbolo: B     =>     Estado Destino: q2    Simbolo Escrito: B     Movimento: LEFT
+Estado: q2       Leitura Simbolo: 0     =>     Estado Destino: q2    Simbolo Escrito: 1     Movimento: LEFT
+Estado: q2       Leitura Simbolo: 1     =>     Estado Destino: q3    Simbolo Escrito: 0     Movimento: LEFT
+Estado: q3       Leitura Simbolo: #     =>     Estado Destino: q3    Simbolo Escrito: #     Movimento: LEFT
+Estado: q3       Leitura Simbolo: 0     =>     Estado Destino: q3    Simbolo Escrito: 0     Movimento: LEFT
+Estado: q3       Leitura Simbolo: 1     =>     Estado Destino: q3    Simbolo Escrito: 1     Movimento: LEFT
+Estado: q3       Leitura Simbolo: S     =>     Estado Destino: q0    Simbolo Escrito: S     Movimento: RIGHT
+---------------------------------------------------------------------------------- 
+
+
+
+Passo - a - Passo da Execucao da Maquina Turing: 
+
+- (q0) ==> [#] #  #  #  #  #  1  1  0 
+- (q1) ==>  S [#] #  #  #  #  1  1  0 
+- (q1) ==>  S  # [#] #  #  #  1  1  0 
+- (q1) ==>  S  #  # [#] #  #  1  1  0 
+- (q1) ==>  S  #  #  # [#] #  1  1  0 
+- (q1) ==>  S  #  #  #  # [#] 1  1  0 
+- (q1) ==>  S  #  #  #  #  # [1] 1  0 
+- (q1) ==>  S  #  #  #  #  #  1 [1] 0 
+- (q1) ==>  S  #  #  #  #  #  1  1 [0]
+- (q1) ==>  S  #  #  #  #  #  1  1  0 [B]
+- (q2) ==>  S  #  #  #  #  #  1  1 [0] B 
+- (q2) ==>  S  #  #  #  #  #  1 [1] 1  B 
+- (q3) ==>  S  #  #  #  #  # [1] 0  1  B 
+- (q3) ==>  S  #  #  #  # [#] 1  0  1  B 
+- (q3) ==>  S  #  #  # [#] #  1  0  1  B 
+- (q3) ==>  S  #  # [#] #  #  1  0  1  B 
+- (q3) ==>  S  # [#] #  #  #  1  0  1  B 
+- (q3) ==>  S [#] #  #  #  #  1  0  1  B 
+- (q3) ==> [S] #  #  #  #  #  1  0  1  B 
+- (q0) ==>  S [#] #  #  #  #  1  0  1  B 
+- (q1) ==>  S  S [#] #  #  #  1  0  1  B 
+- (q1) ==>  S  S  # [#] #  #  1  0  1  B 
+- (q1) ==>  S  S  #  # [#] #  1  0  1  B 
+- (q1) ==>  S  S  #  #  # [#] 1  0  1  B 
+- (q1) ==>  S  S  #  #  #  # [1] 0  1  B 
+- (q1) ==>  S  S  #  #  #  #  1 [0] 1  B 
+- (q1) ==>  S  S  #  #  #  #  1  0 [1] B 
+- (q1) ==>  S  S  #  #  #  #  1  0  1 [B]
+- (q2) ==>  S  S  #  #  #  #  1  0 [1] B 
+- (q3) ==>  S  S  #  #  #  #  1 [0] 0  B 
+- (q3) ==>  S  S  #  #  #  # [1] 0  0  B 
+- (q3) ==>  S  S  #  #  # [#] 1  0  0  B 
+- (q3) ==>  S  S  #  # [#] #  1  0  0  B 
+- (q3) ==>  S  S  # [#] #  #  1  0  0  B 
+- (q3) ==>  S  S [#] #  #  #  1  0  0  B 
+- (q3) ==>  S [S] #  #  #  #  1  0  0  B 
+- (q0) ==>  S  S [#] #  #  #  1  0  0  B 
+- (q1) ==>  S  S  S [#] #  #  1  0  0  B 
+- (q1) ==>  S  S  S  # [#] #  1  0  0  B 
+- (q1) ==>  S  S  S  #  # [#] 1  0  0  B 
+- (q1) ==>  S  S  S  #  #  # [1] 0  0  B 
+- (q1) ==>  S  S  S  #  #  #  1 [0] 0  B 
+- (q1) ==>  S  S  S  #  #  #  1  0 [0] B 
+- (q1) ==>  S  S  S  #  #  #  1  0  0 [B]
+- (q2) ==>  S  S  S  #  #  #  1  0 [0] B 
+- (q2) ==>  S  S  S  #  #  #  1 [0] 1  B 
+- (q2) ==>  S  S  S  #  #  # [1] 1  1  B 
+- (q3) ==>  S  S  S  #  # [#] 0  1  1  B 
+- (q3) ==>  S  S  S  # [#] #  0  1  1  B 
+- (q3) ==>  S  S  S [#] #  #  0  1  1  B 
+- (q3) ==>  S  S [S] #  #  #  0  1  1  B 
+- (q0) ==>  S  S  S [#] #  #  0  1  1  B 
+- (q1) ==>  S  S  S  S [#] #  0  1  1  B 
+- (q1) ==>  S  S  S  S  # [#] 0  1  1  B 
+- (q1) ==>  S  S  S  S  #  # [0] 1  1  B 
+- (q1) ==>  S  S  S  S  #  #  0 [1] 1  B 
+- (q1) ==>  S  S  S  S  #  #  0  1 [1] B 
+- (q1) ==>  S  S  S  S  #  #  0  1  1 [B]
+- (q2) ==>  S  S  S  S  #  #  0  1 [1] B 
+- (q3) ==>  S  S  S  S  #  #  0 [1] 0  B 
+- (q3) ==>  S  S  S  S  #  # [0] 1  0  B 
+- (q3) ==>  S  S  S  S  # [#] 0  1  0  B 
+- (q3) ==>  S  S  S  S [#] #  0  1  0  B 
+- (q3) ==>  S  S  S [S] #  #  0  1  0  B 
+- (q0) ==>  S  S  S  S [#] #  0  1  0  B 
+- (q1) ==>  S  S  S  S  S [#] 0  1  0  B 
+- (q1) ==>  S  S  S  S  S  # [0] 1  0  B 
+- (q1) ==>  S  S  S  S  S  #  0 [1] 0  B 
+- (q1) ==>  S  S  S  S  S  #  0  1 [0] B 
+- (q1) ==>  S  S  S  S  S  #  0  1  0 [B]
+- (q2) ==>  S  S  S  S  S  #  0  1 [0] B 
+- (q2) ==>  S  S  S  S  S  #  0 [1] 1  B 
+- (q3) ==>  S  S  S  S  S  # [0] 0  1  B 
+- (q3) ==>  S  S  S  S  S [#] 0  0  1  B 
+- (q3) ==>  S  S  S  S [S] #  0  0  1  B 
+- (q0) ==>  S  S  S  S  S [#] 0  0  1  B 
+- (q1) ==>  S  S  S  S  S  S [0] 0  1  B 
+- (q1) ==>  S  S  S  S  S  S  0 [0] 1  B 
+- (q1) ==>  S  S  S  S  S  S  0  0 [1] B 
+- (q1) ==>  S  S  S  S  S  S  0  0  1 [B]
+- (q2) ==>  S  S  S  S  S  S  0  0 [1] B 
+- (q3) ==>  S  S  S  S  S  S  0 [0] 0  B 
+- (q3) ==>  S  S  S  S  S  S [0] 0  0  B 
+- (q3) ==>  S  S  S  S  S [S] 0  0  0  B 
+- (q0) ==>  S  S  S  S  S  S [0] 0  0  B 
+- (q0) ==>  S  S  S  S  S  S  0 [0] 0  B 
+- (q0) ==>  S  S  S  S  S  S  0  0 [0] B 
+- (q0) ==>  S  S  S  S  S  S  0  0  0 [B]
+- (qf) ==>  S  S  S  S  S  S  0  0 [0] B 
+
+---------------------------------------------------------------------------------- 
+
+
+As Producoes realizadas foram as seguintes: 
+
+- delta(q0, #) = (q1, S, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, B) = (q2, B, LEFT) 
+- delta(q2, 0) = (q2, 1, LEFT) 
+- delta(q2, 1) = (q3, 0, LEFT) 
+- delta(q3, 1) = (q3, 1, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, S) = (q0, S, RIGHT) 
+- delta(q0, #) = (q1, S, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, B) = (q2, B, LEFT) 
+- delta(q2, 1) = (q3, 0, LEFT) 
+- delta(q3, 0) = (q3, 0, LEFT) 
+- delta(q3, 1) = (q3, 1, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, S) = (q0, S, RIGHT) 
+- delta(q0, #) = (q1, S, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, B) = (q2, B, LEFT) 
+- delta(q2, 0) = (q2, 1, LEFT) 
+- delta(q2, 0) = (q2, 1, LEFT) 
+- delta(q2, 1) = (q3, 0, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, S) = (q0, S, RIGHT) 
+- delta(q0, #) = (q1, S, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, B) = (q2, B, LEFT) 
+- delta(q2, 1) = (q3, 0, LEFT) 
+- delta(q3, 1) = (q3, 1, LEFT) 
+- delta(q3, 0) = (q3, 0, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, S) = (q0, S, RIGHT) 
+- delta(q0, #) = (q1, S, RIGHT) 
+- delta(q1, #) = (q1, #, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, B) = (q2, B, LEFT) 
+- delta(q2, 0) = (q2, 1, LEFT) 
+- delta(q2, 1) = (q3, 0, LEFT) 
+- delta(q3, 0) = (q3, 0, LEFT) 
+- delta(q3, #) = (q3, #, LEFT) 
+- delta(q3, S) = (q0, S, RIGHT) 
+- delta(q0, #) = (q1, S, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, 0) = (q1, 0, RIGHT) 
+- delta(q1, 1) = (q1, 1, RIGHT) 
+- delta(q1, B) = (q2, B, LEFT) 
+- delta(q2, 1) = (q3, 0, LEFT) 
+- delta(q3, 0) = (q3, 0, LEFT) 
+- delta(q3, 0) = (q3, 0, LEFT) 
+- delta(q3, S) = (q0, S, RIGHT) 
+- delta(q0, 0) = (q0, 0, RIGHT) 
+- delta(q0, 0) = (q0, 0, RIGHT) 
+- delta(q0, 0) = (q0, 0, RIGHT) 
+- delta(q0, B) = (qf, B, LEFT) 
+
+---------------------------------------------------------------------------------- 
+
+ CONCLUSAO: 
+
+
+A maquina de Turing parou e respondeu TRUE para palavra: ######110
