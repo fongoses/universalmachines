@@ -7,26 +7,44 @@
 #include "Saida.h"
 #include <set>
 #include <map>
+#include <list>
 #include <vector>
+#include "etc\Arquivo.h"
 using namespace std;
 
 
 class Turing {
 
 public:
-	vector<string> fita;
-	string estado;
-	int posicao; //posicao da cabeca
-	set<string> finais;
-	map<Entrada,Saida> delta;
-	string producoes;
-
 	Turing();
 	bool executa();
 	void imprimeFita();
-
+	void setFileOut(Arquivo*);
 	string imprimeRegra(Entrada, Saida);
 	bool final();
+	
+	void setFita(list<string>);
+	void setEstadoInicial(string);
+	void setPosicao(int);
+	void setEstadosFinais(string);
+	void insertDados(Entrada,Saida);
+	void showDelta();
+	void addProducoes(string);
+	
+	string getEstadoInicial()const;
+	string getEstadosFinais()const;
+	int getPosicao() const;
+	list<string> getProducoes()const;
+
+private:
+	Arquivo *fileOut;
+	vector<string> fita;
+	string estado;
+	string estadoInicial;
+	int posicao; 
+	set<string> estadosFinais;
+	map<Entrada,Saida> delta;
+	list<string> producoes;
 
 };
 
