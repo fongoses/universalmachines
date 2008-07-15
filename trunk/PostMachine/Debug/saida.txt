@@ -30,46 +30,26 @@ Estado: q3       Head: b     =>     Concatenarb    Proximo Estado:  q3
 
 
 
-Resultado Parcial : aabb
+Resultado Parcial : aaba
 Estado Atual :START    Cabeca: ~
 Concatenacao:#     Proximo Estado: q1
 ---------------------------------------------------------------------------------- 
-Resultado Parcial : aabb#
+Resultado Parcial : aaba#
 Estado Atual :q1    Cabeca: a
 Concatenacao:~     Proximo Estado: q2
 ---------------------------------------------------------------------------------- 
-Resultado Parcial : abb#
+Resultado Parcial : aba#
 Estado Atual :q2    Cabeca: a
 Concatenacao:a     Proximo Estado: q2
 ---------------------------------------------------------------------------------- 
-Resultado Parcial : bb#a
+Resultado Parcial : ba#a
 Estado Atual :q2    Cabeca: b
 Concatenacao:~     Proximo Estado: q3
 ---------------------------------------------------------------------------------- 
-Resultado Parcial : b#a
-Estado Atual :q3    Cabeca: b
-Concatenacao:b     Proximo Estado: q3
----------------------------------------------------------------------------------- 
-Resultado Parcial : #ab
-Estado Atual :q3    Cabeca: #
-Concatenacao:#     Proximo Estado: q1
----------------------------------------------------------------------------------- 
-Resultado Parcial : ab#
-Estado Atual :q1    Cabeca: a
-Concatenacao:~     Proximo Estado: q2
----------------------------------------------------------------------------------- 
-Resultado Parcial : b#
-Estado Atual :q2    Cabeca: b
-Concatenacao:~     Proximo Estado: q3
----------------------------------------------------------------------------------- 
-Resultado Parcial : #
-Estado Atual :q3    Cabeca: #
-Concatenacao:#     Proximo Estado: q1
----------------------------------------------------------------------------------- 
-Resultado Parcial : #
-Estado Atual :q1    Cabeca: #
-Concatenacao:~     Proximo Estado: ACCEPT
+Resultado Parcial : a#a
+Estado Atual :q3    Cabeca: a
+Concatenacao:~     Proximo Estado: REJECT
 ---------------------------------------------------------------------------------- 
 
 
-A maquina de Post ACEITOU a palavra: aabb
+A maquina de Post REJEITOU a palavra: aaba
