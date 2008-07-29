@@ -292,7 +292,8 @@ void TwoStack::showDelta() {
 	for (it = this->delta.begin(); it != this->delta.end(); it++) {
 		this->fileOut->write("estado: " + (*it).first.getEstado()
 				+ "   head: " + (*it).first.getHead()
-				+ "   headPilha: " + (*it).first.getHeadStack(0) 
+				+ "   headPilha1: " + (*it).first.getHeadStack(0) 
+				+ "   headPilha2: " + (*it).first.getHeadStack(1) 
 				+ "    =>     concatenar: " + (*it).second.getConcatenar()
 				+ "   concatenar Pilha 1:" + (*it).second.getConcatenarStack(0)
 				+ "   concatenar Pilha 2:" + (*it).second.getConcatenarStack(1)
