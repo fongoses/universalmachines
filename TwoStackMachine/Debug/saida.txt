@@ -12,33 +12,33 @@
 |__________________________________________________________________________________|
 
 
-Funcao Programa da Maquina de 1 PILHA:
+Funcao Programa da Maquina de 2 PILHAS:
 
-estado: START   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q1
-estado: q1   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q3
-estado: q1   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:a   concatenar Pilha 2:~   proximo: q1
-estado: q1   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q2
-estado: q2   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q2   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:b   proximo: q4
-estado: q2   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q3   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: ACCEPT
-estado: q3   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q3   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q4   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q4   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q5
-estado: q4   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q2
-estado: q5   head: ~   headPilha: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q6
-estado: q5   head: ~   headPilha: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q5   head: ~   headPilha: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q6   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q6   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q6   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q7
-estado: q7   head: @   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q8
-estado: q7   head: a   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q6
-estado: q7   head: b   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q8   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: ACCEPT
-estado: q8   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
-estado: q8   head: ~   headPilha: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: START   head: ~   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q1
+estado: q1   head: @   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q3
+estado: q1   head: a   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:a   concatenar Pilha 2:~   proximo: q1
+estado: q1   head: b   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q2
+estado: q2   head: ~   headPilha1: @   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q2   head: ~   headPilha1: a   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:b   proximo: q4
+estado: q2   head: ~   headPilha1: b   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q3   head: ~   headPilha1: @   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: ACCEPT
+estado: q3   head: ~   headPilha1: a   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q3   head: ~   headPilha1: b   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q4   head: @   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q4   head: a   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q5
+estado: q4   head: b   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q2
+estado: q5   head: ~   headPilha1: @   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q6
+estado: q5   head: ~   headPilha1: a   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q5   head: ~   headPilha1: b   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q6   head: ~   headPilha1: ~   headPilha2: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q6   head: ~   headPilha1: ~   headPilha2: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q6   head: ~   headPilha1: ~   headPilha2: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q7
+estado: q7   head: @   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q8
+estado: q7   head: a   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: q6
+estado: q7   head: b   headPilha1: ~   headPilha2: ~    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q8   head: ~   headPilha1: ~   headPilha2: @    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: ACCEPT
+estado: q8   head: ~   headPilha1: ~   headPilha2: a    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
+estado: q8   head: ~   headPilha1: ~   headPilha2: b    =>     concatenar: ~   concatenar Pilha 1:~   concatenar Pilha 2:~   proximo: REJECT
 ---------------------------------------------------------------------------------- 
 
 
