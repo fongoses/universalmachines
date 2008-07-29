@@ -37,21 +37,10 @@ Estado: q5       Leitura Simbolo: b     =>     Estado Destino: q5    Simbolo Esc
 
 Passo - a - Passo da Execucao da Maquina Turing: 
 
-- (q0) ==> [a] b  b  a 
-- (q1) ==>  B [b] b  a 
-- (q1) ==>  B  b [b] a 
-- (q1) ==>  B  b  b [a]
-- (q1) ==>  B  b  b  a [B]
-- (q3) ==>  B  b  b [a] B 
-- (q5) ==>  B  b [b] B  B 
-- (q5) ==>  B [b] b  B  B 
-- (q5) ==> [B] b  b  B  B 
-- (q0) ==>  B [b] b  B  B 
-- (q2) ==>  B  B [b] B  B 
-- (q2) ==>  B  B  b [B] B 
-- (q4) ==>  B  B [b] B  B 
-- (q5) ==>  B [B] B  B  B 
-- (q0) ==>  B  B [B] B  B 
+- (q0) ==> [a] b 
+- (q1) ==>  B [b]
+- (q1) ==>  B  b [B]
+- (q3) ==>  B [b] B 
 
 ---------------------------------------------------------------------------------- 
 
@@ -60,22 +49,11 @@ As Producoes realizadas foram as seguintes:
 
 - delta(q0, a) = (q1, B, RIGHT) 
 - delta(q1, b) = (q1, b, RIGHT) 
-- delta(q1, b) = (q1, b, RIGHT) 
-- delta(q1, a) = (q1, a, RIGHT) 
 - delta(q1, B) = (q3, B, LEFT) 
-- delta(q3, a) = (q5, B, LEFT) 
-- delta(q5, b) = (q5, b, LEFT) 
-- delta(q5, b) = (q5, b, LEFT) 
-- delta(q5, B) = (q0, B, RIGHT) 
-- delta(q0, b) = (q2, B, RIGHT) 
-- delta(q2, b) = (q2, b, RIGHT) 
-- delta(q2, B) = (q4, B, LEFT) 
-- delta(q4, b) = (q5, B, LEFT) 
-- delta(q5, B) = (q0, B, RIGHT) 
 
 ---------------------------------------------------------------------------------- 
 
  CONCLUSAO: 
 
 
-A maquina de Turing parou e respondeu TRUE para palavra: abba
+A maquina de Turing parou e respondeu FALSE para palavra: ab
