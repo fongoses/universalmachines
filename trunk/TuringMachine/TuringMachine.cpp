@@ -62,35 +62,72 @@ int main(int argc, char *argv[]) {
 	char *out;
 	char *alfa;
 
-	if (argc == 5) {
+	/*
+	 * armazenar o numero de vezes que ira
+	 * acontecer o loop
+	 */
+	char *tamanhoLoop = 0;
+
+	if (argc == 6) {
 		programa = argv[1];
 		fita = argv[2];
 		alfa = argv[3];
 		out = argv[4];
+		tamanhoLoop = argv[5];
 		fileProgram.setEnd(programa);
 		fileFita.setEnd(fita);
 		fileAlfabeto.setEnd(alfa);
 		fileOut.setEnd(out);
-	} else {
+	} else if (argc == 1) {
 		fileProgram.setEnd("programa.txt");
 		fileFita.setEnd("fita.txt");
 		fileAlfabeto.setEnd("alfabeto.txt");
 		fileOut.setEnd("saida.txt");
+		tamanhoLoop = "50";
+	} else {
+		cout << "Programa executando de maneira errada!" << endl
+				<< "Exemplo da linha de comando sem os \"[\" \"]\": " << endl;
+		cout
+				<< "[TuringMachine.exe] [programa.txt] [fita.txt] [alfabeto.txt] [saida.txt] [50]"
+				<< endl;
+		system("pause");
+		exit(0);
 	}
 
-	/*
-	 * abertura dos arquivos
-	 */
-	fileProgram.abrir(fstream::in);
-	fileFita.abrir(fstream::in);
-	fileAlfabeto.abrir(fstream::in);
-	fileOut.abrir(fstream::out);
+	try {
+		/*
+		 * abertura dos arquivos
+		 */
+		fileProgram.abrir(fstream::in);
+		if(!fileProgram.isOpen()) {
+			throw string("Arquivo \""+fileProgram.getEnd()+"\" inexistente!!");
+		}
+		fileFita.abrir(fstream::in);
+		if(!fileFita.isOpen()) {
+			throw string("Arquivo \""+fileFita.getEnd()+"\" inexistente!!");
+		}
+		fileAlfabeto.abrir(fstream::in);
+		if(!fileAlfabeto.isOpen()) {
+			throw string("Arquivo \""+fileAlfabeto.getEnd()+"\" inexistente!!");
+		}
+		fileOut.abrir(fstream::out);
+	} catch (string e) {
+		cout << endl << e << endl;
+		system("pause");
+		exit(1);
+	}
 
 	/*
 	 * setanto o arquivo de saida para a maquina
 	 * de turing realziar a escrita no mesmo
 	 */
 	turingMachine.setFileOut(&fileOut);
+
+	/*
+	 * setando o tamanho do loop
+	 */
+
+	turingMachine.setLoop(tamanhoLoop);
 
 	/*
 	 * setanto o alfabeto
@@ -125,6 +162,16 @@ int main(int argc, char *argv[]) {
 			}
 
 		}
+	}
+
+	/*
+	 * se a palavra for vazia sai do programa
+	 */
+	if (palavra.size() == 0) {
+		cout << "palavra vazia!! verifique o arquivo: \"" +fileFita.getEnd()
+				+ "\""<<endl;
+		system("pause");
+		exit(1);
 	}
 
 	/*
@@ -201,6 +248,19 @@ int main(int argc, char *argv[]) {
 	fileOut.write("Passo - a - Passo da Execucao da Maquina Turing: \n\n");
 	do {
 		turingMachine.imprimeFita();
+		turingMachine.decrementa();
+		if (turingMachine.getLoop() == 0) {
+			fileOut.write("\n\n\nMaquina de Turing entrou em LOOP\n\n");
+			/*
+			 * fecha os arquivos
+			 */
+			fileProgram.fechar();
+			fileFita.fechar();
+			fileAlfabeto.fechar();
+			fileOut.fechar();
+			exit(0);
+
+		}
 	} while (turingMachine.executa());
 
 	/*
@@ -237,7 +297,7 @@ int main(int argc, char *argv[]) {
 	} else {
 		fileOut.write(word);
 	}
-	
+
 	/*
 	 * fecha os arquivos
 	 */
@@ -245,5 +305,6 @@ int main(int argc, char *argv[]) {
 	fileFita.fechar();
 	fileAlfabeto.fechar();
 	fileOut.fechar();
+
 	return 0;
 }

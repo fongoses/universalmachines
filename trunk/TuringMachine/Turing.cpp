@@ -5,6 +5,22 @@ Turing::Turing() {
 
 }
 
+void Turing::setLoop(char* loop) {
+	string looping = (string)loop;
+
+	stringstream stm;
+	stm.str(looping);
+	stm >> this->loop;
+}
+
+int Turing::getLoop() {
+	return(this->loop);
+}
+
+void Turing::decrementa(){
+	this->loop--;
+}
+
 bool Turing::executa() {
 	Entrada entrada(this->estado, this->fita[posicao]);
 	if (this->delta.find(entrada) != this->delta.end()) {
@@ -40,14 +56,15 @@ void Turing::imprimeFita() {
 
 string Turing::imprimeRegra(Entrada entrada, Saida saida) {
 	string aux = "";
-	aux = "- delta(" + entrada.getEstado() + ", " + entrada.getSimbolo() + ") = ";
+	aux = "- delta(" + entrada.getEstado() + ", " + entrada.getSimbolo()
+			+ ") = ";
 	aux += "(" + saida.getEstado() + ", " + saida.getSimbolo() + ", "
 			+ saida.getMovimento() + ") \n";
 	return aux;
 }
 
 bool Turing::final() {
-	if (this->estadosFinais.find(estado) != this->estadosFinais.end()){
+	if (this->estadosFinais.find(estado) != this->estadosFinais.end()) {
 		return (true);
 	}
 	return false;
@@ -110,6 +127,6 @@ int Turing::getPosicao() const {
 void Turing::addProducoes(string producoes) {
 	this->producoes.push_back(producoes);
 }
-list<string> Turing::getProducoes()const{
-	return(this->producoes);
+list<string> Turing::getProducoes() const {
+	return (this->producoes);
 }
