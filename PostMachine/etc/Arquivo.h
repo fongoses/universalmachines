@@ -11,6 +11,7 @@ class Arquivo {
 public:
 	Arquivo();
 	void setEnd(char*);
+	string getEnd()const;
 	virtual ~Arquivo();
 	void abrir(ios_base::openmode);
 	void fechar();
