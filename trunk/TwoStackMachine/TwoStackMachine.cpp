@@ -16,45 +16,116 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
+	/*
+	 * vetor para armazenar a palavra de entrada
+	 */
 	vector<string> palavra;
 	vector<string>::iterator it;
 
+	/*
+	 * objeto arquivos para realizar
+	 * o tratamento dos mesmos
+	 */
 	Arquivo fileProgram;
 	Arquivo fileFila;
 	Arquivo fileOut;
 	Arquivo fileAlfabeto;
 
+	/*
+	 * objeto cadeia para tratar da cadeia
+	 */
 	Cadeia cadeia;
 
+	/*
+	 * objeto duas pilha propriamento dito
+	 */
 	TwoStack twoStack;
 
+	/*
+	 * objeto alfabeto para verificar se a cadeia contem
+	 * as letra do alfabeto
+	 */
 	Alfabeto alfabeto;
 
+	/*
+	 * variaveis auxiliares
+	 * para armazenar os nomes do arquivos que
+	 * nao vao ser executado por padrao
+	 */
 	char *programa, *fila, *out, *alfa;
 
-	if (argc == 5) {
+	/*
+	 * armazenar o numero de vezes que ira
+	 * acontecer o loop
+	 */
+	char *tamanhoLoop = 0;
+
+	/*
+	 * fazendo a verificacao de entrada
+	 */
+	if (argc == 6) {
 		programa = argv[1];
 		fila = argv[2];
 		alfa = argv[3];
 		out = argv[4];
+		tamanhoLoop = argv[5];
 		fileProgram.setEnd(programa);
 		fileFila.setEnd(fila);
 		fileAlfabeto.setEnd(alfa);
 		fileOut.setEnd(out);
-	} else {
+	} else if (argc == 1) {
 		fileProgram.setEnd("programa.txt");
 		fileFila.setEnd("fila.txt");
 		fileAlfabeto.setEnd("alfabeto.txt");
 		fileOut.setEnd("saida.txt");
+		tamanhoLoop = "50";
+	} else {
+		cout << "Programa executando de maneira errada!" << endl
+				<< "Exemplo da linha de comando sem os \"[\" \"]\": " << endl;
+		cout
+				<< "[TuringMachine.exe] [programa.txt] [fila.txt] [alfabeto.txt] [saida.txt] [50]"
+				<< endl;
+		system("pause");
+		exit(0);
 	}
 
-	fileProgram.abrir(fstream::in);
-	fileFila.abrir(fstream::in);
-	fileOut.abrir(fstream::out);
-	fileAlfabeto.abrir(fstream::in);
+	try {
+		/*
+		 * abertura dos arquivos
+		 */
+		fileProgram.abrir(fstream::in);
+		if(!fileProgram.isOpen()) {
+			throw string("Arquivo \""+fileProgram.getEnd()+"\" inexistente!!");
+		}
+		fileFila.abrir(fstream::in);
+		if(!fileFila.isOpen()) {
+			throw string("Arquivo \""+fileFila.getEnd()+"\" inexistente!!");
+		}
+		fileAlfabeto.abrir(fstream::in);
+		if(!fileAlfabeto.isOpen()) {
+			throw string("Arquivo \""+fileAlfabeto.getEnd()+"\" inexistente!!");
+		}
+		fileOut.abrir(fstream::out);
+	} catch (string e) {
+		cout << endl << e << endl;
+		system("pause");
+		exit(1);
+	}
 
+	/*
+	 * setanto o arquivo de saida para a maquina
+	 * de 2 pilha realziar a escrita no mesmo
+	 */
 	twoStack.setFileOut(&fileOut);
 
+	/*
+	 * setando o tamanho do loop
+	 */
+	twoStack.setLoop(tamanhoLoop);
+
+	/*
+	 * setanto o alfabeto
+	 */
 	while (!fileAlfabeto.isTheEnd()) {
 		string line = fileAlfabeto.getLinha();
 		if (line.compare("") != 0) {
@@ -63,6 +134,9 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
+	/*
+	 * setanto a fita
+	 */
 	while (!fileFila.isTheEnd()) {
 		string line = fileFila.getLinha();
 		if (line.compare("") != 0) {
@@ -84,6 +158,9 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
+	/*
+	 * setanto o programa da maquina de 2 pilha
+	 */
 	while (!fileProgram.isTheEnd()) {
 		string line = fileProgram.getLinha();
 		if (line.compare("") != 0) {
@@ -105,6 +182,10 @@ int main(int argc, char *argv[]) {
 
 		}
 	}
+
+	/*
+	 * realizando os processos do arquivo de saida
+	 */
 	fileOut.write("********************************************************************************** \n");
 	fileOut.write("*Alunos:     Pedro Sanches Junior                                                * \n");
 	fileOut.write("*            Thiago Augusto Lopes Genez                                          * \n");
@@ -117,13 +198,17 @@ int main(int argc, char *argv[]) {
 	fileOut.write("|    S I M U L A D O R     D A     M A Q U I N A     D E     2  P I L H A          |\n");
 	fileOut.write("|__________________________________________________________________________________|\n\n\n");
 
+	/*
+	 * mosttra a funcao delta da maquina de 2 pilha
+	 */
 	twoStack.showDelta();
 
-	if (twoStack.executar()) {
-		fileOut.write("\n\nA Maquina de 2 Pilhas ACEITOU a palavra: ");
-	} else {
-		fileOut.write("\n\nA Maquina de 2 Pilhas REJEITOU a palavra : ");
-	}
+	/*
+	 * realizando a execucao da maquina
+	 * e a conclusao da palavra de entrada na maquina
+	 * de duas pilhas
+	 */
+	fileOut.write(twoStack.executar());
 
 	string word = "";
 	for (it = palavra.begin(); it < palavra.end(); it++) {
@@ -135,6 +220,9 @@ int main(int argc, char *argv[]) {
 		fileOut.write(word);
 	}
 
+	/*
+	 * fecha os arquivos
+	 */
 	fileProgram.fechar();
 	fileFila.fechar();
 	fileAlfabeto.fechar();
