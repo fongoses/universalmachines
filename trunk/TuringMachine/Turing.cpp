@@ -2,7 +2,7 @@
 
 Turing::Turing() {
 	this->setPosicao(0);
-
+	this->loop = 0;
 }
 
 void Turing::setLoop(char* loop) {
