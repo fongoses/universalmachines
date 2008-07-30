@@ -7,6 +7,10 @@ Arquivo::Arquivo() {
 void Arquivo::setEnd(char *enderecoArquivo) {
 	this->enderecoArquivo = enderecoArquivo;
 }
+
+string Arquivo::getEnd() const {
+	return ((string)this->enderecoArquivo);
+}
 /* @resume:destrutor */
 Arquivo::~Arquivo() {
 }
