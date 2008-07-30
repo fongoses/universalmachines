@@ -2,6 +2,7 @@
 
 TwoStack::TwoStack() {
 	this->fileOut = NULL;
+	this->loop = 0;
 }
 
 TwoStack::~TwoStack() {
@@ -25,6 +26,18 @@ void TwoStack::tail(typeQueue tipo) {
 		}
 	}
 
+}
+
+void TwoStack::setLoop(char* loop) {
+	string looping = (string)loop;
+
+	stringstream stm;
+	stm.str(looping);
+	stm >> this->loop;
+}
+
+int TwoStack::getLoop() {
+	return (this->loop);
 }
 
 string TwoStack::head(typeQueue tipo) {
@@ -84,7 +97,7 @@ void TwoStack::insertDados(Entrada in, Saida out) {
 	this->delta.insert(pair<Entrada, Saida>(in, out) );
 }
 
-bool TwoStack::executar() {
+string TwoStack::executar() {
 	map<Entrada,Saida>::iterator it;
 	int tamanho = (int)this->delta.size();
 
@@ -100,8 +113,10 @@ bool TwoStack::executar() {
 	bool isFila = false;
 	bool isStackOne = false;
 	bool isStackTwo = false;
+	
+	int looping = this->getLoop();
 
-	while (true) {
+	while (looping >= 0) {
 		try {
 			isFila = false;
 			isStackOne = false;
@@ -177,9 +192,9 @@ bool TwoStack::executar() {
 				this->concatenarBegin(saida.getConcatenarStack(1), STACKTWO);
 			}
 			if (saida.getProximoEstado().compare("ACCEPT") == 0) {
-				return true;
+				return ("\n\nA Maquina de 2 Pilhas ACEITOU a palavra: ");
 			} else if (saida.getProximoEstado().compare("REJECT") == 0) {
-				return false;
+				return ("\n\nA Maquina de 2 Pilhas REJEITOU a palavra : ");
 			} else {
 				nextState = saida.getProximoEstado();
 			}
@@ -215,6 +230,7 @@ bool TwoStack::executar() {
 			cabeca = "";
 			cabecaPilha = "";
 			cabecaPilha2 = "";
+			looping--;
 		} catch (...) {
 			this->fileOut->write("ERRO DE EXECUCAO\n");
 			system("pause");
@@ -222,7 +238,8 @@ bool TwoStack::executar() {
 		}
 
 	}
-	return false;
+	return ("\n\nA maquina de 2 Pilhas entrou em LOOP (laco de \""
+			+this->IntToString(this->loop) +"\" repeticoes) para a palavra: ");
 }
 void TwoStack::lookAhead(Entrada entrada, Saida saida, bool *isFila,
 		bool *isStackOne, bool *isStackTwo) {

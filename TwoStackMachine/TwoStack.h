@@ -12,7 +12,6 @@
 #include "etc\Arquivo.h"
 #include <sstream>
 
-
 using namespace std;
 
 enum typeQueue {
@@ -24,7 +23,7 @@ public:
 	TwoStack();
 	void tail(typeQueue);
 	string head(typeQueue);
-	bool executar();
+	string executar();
 	void concatenarBegin(string, typeQueue);
 	void concatenarEnd(string, typeQueue);
 	void setPalavraEntrada(list<string>);
@@ -33,12 +32,15 @@ public:
 	void showPilha(int,list<string>);
 	void showDelta();
 	void setFileOut(Arquivo*);
+	void setLoop(char*);
+	int getLoop();
 	virtual ~TwoStack();
 
 private:
 
 	void lookAhead(Entrada, Saida, bool*, bool*,bool*);
 	Cadeia cadeia;
+	int loop;
 	map<Entrada,Saida> delta;
 	bool isEmpty(typeQueue);
 	list<string> palavraEntrada;
