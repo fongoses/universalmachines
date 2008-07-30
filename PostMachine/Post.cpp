@@ -2,10 +2,23 @@
 
 Post::Post() {
 	this->fileOut = NULL;
+	this->loop = 0;
 }
 
 Post::~Post() {
 
+}
+
+void Post::setLoop(char* loop) {
+	string looping = (string)loop;
+
+	stringstream stm;
+	stm.str(looping);
+	stm >> this->loop;
+}
+
+int Post::getLoop() {
+	return (this->loop);
 }
 
 void Post::tail() {
@@ -41,12 +54,13 @@ void Post::insertDados(Entrada in, Saida out) {
 	this->delta.insert(pair<Entrada, Saida>(in, out) );
 }
 
-bool Post::executar() {
+string Post::executar() {
 	map<Entrada,Saida>::iterator it;
 	Entrada entrada("START", "~");
 	string cabeca = "";
 	string nextState = "";
-	while (true) {
+	int laco = this->loop;
+	while (laco >= 0) {
 		this->showPalavraEntrada();
 
 		Saida saida = this->delta[entrada];
@@ -66,9 +80,9 @@ bool Post::executar() {
 			this->concatenarEnd(saida.getConcatenar());
 		}
 		if (saida.getProximoEstado().compare("ACCEPT") == 0) {
-			return true;
+			return ("\n\nA maquina de Post ACEITOU a palavra: ");
 		} else if (saida.getProximoEstado().compare("REJECT") == 0) {
-			return false;
+			return ("\n\nA maquina de Post REJEITOU a palavra: ");
 		} else {
 			nextState = saida.getProximoEstado();
 		}
@@ -79,8 +93,11 @@ bool Post::executar() {
 		}
 		entrada = Entrada(nextState, cabeca);
 		cabeca = "";
+		laco--;
 	}
-	return false;
+
+	return ("\n\nA maquina de Post entrou em LOOP (laco de \""
+			+this->IntToString(this->loop) +"\" repeticoes) para a palavra: ");
 }
 void Post::showPalavraEntrada() {
 	list<string>::iterator it;
@@ -110,4 +127,10 @@ void Post::showDelta() {
 
 void Post::setFileOut(Arquivo* fileOut) {
 	this->fileOut = fileOut;
+}
+
+string Post::IntToString(int num) {
+	stringstream out;
+	out << num;
+	return (out.str());
 }

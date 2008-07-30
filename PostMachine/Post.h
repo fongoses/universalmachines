@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <sstream>
 #include "etc\Arquivo.h"
 #include "Entrada.h"
 #include "Saida.h"
@@ -18,7 +19,7 @@ public:
 
 	void tail();
 	string head();
-	bool executar();
+	string executar();
 	void concatenarBegin(string);
 	void concatenarEnd(string);
 	void setPalavraEntrada(list<string>);
@@ -26,10 +27,15 @@ public:
 	void showPalavraEntrada();
 	void showDelta();
 	void setFileOut(Arquivo*);
+	void setLoop(char*);
+	int getLoop();
+	string IntToString(int);
 	virtual ~Post();
+	
 
 private:
 
+	int loop;
 	Cadeia cadeia;
 	map<Entrada,Saida> delta;
 	bool isEmpty();
