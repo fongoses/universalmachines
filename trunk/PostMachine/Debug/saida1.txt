@@ -1,0 +1,40 @@
+********************************************************************************** 
+*Alunos:     Pedro Sanches Junior                                                * 
+*            Thiago Augusto Lopes Genez                                          * 
+*                                                                                * 
+*Professora: Maria Angelica Brunetto                                             * 
+*                                                                                * 
+*Disciplina: Teoria da Computcao                                                 * 
+********************************************************************************** 
+
+---------------------------------------------------------------------------------- 
+|    S I M U L A D O R     D A     M A Q U I N A     D E     P O S T               |
+|__________________________________________________________________________________|
+
+
+Funcao Programa da Maquina de POST:
+Estado: START       Head: ~     =>     Concatenar~    Proximo Estado:  q1
+Estado: q1       Head: @     =>     Concatenar~    Proximo Estado:  ACCEPT
+Estado: q1       Head: a     =>     Concatenar~    Proximo Estado:  q2
+Estado: q1       Head: b     =>     Concatenar~    Proximo Estado:  q3
+Estado: q2       Head: @     =>     Concatenar~    Proximo Estado:  REJECT
+Estado: q2       Head: a     =>     Concatenara    Proximo Estado:  q2
+Estado: q2       Head: b     =>     Concatenar~    Proximo Estado:  q1
+Estado: q3       Head: @     =>     Concatenar~    Proximo Estado:  REJECT
+Estado: q3       Head: a     =>     Concatenar~    Proximo Estado:  q1
+Estado: q3       Head: b     =>     Concatenarb    Proximo Estado:  q3
+---------------------------------------------------------------------------------- 
+
+
+
+Resultado Parcial :  vazia
+Estado Atual :START    Cabeca: ~
+Concatenacao:~     Proximo Estado: q1
+---------------------------------------------------------------------------------- 
+Resultado Parcial :  vazia
+Estado Atual :q1    Cabeca: @
+Concatenacao:~     Proximo Estado: ACCEPT
+---------------------------------------------------------------------------------- 
+
+
+A maquina de Post ACEITOU a palavra: "palavra vazia"
