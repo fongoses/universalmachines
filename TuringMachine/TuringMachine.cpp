@@ -68,6 +68,9 @@ int main(int argc, char *argv[]) {
 	 */
 	char *tamanhoLoop = 0;
 
+	/*
+	 * fazendo a verificacao de entrada
+	 */
 	if (argc == 6) {
 		programa = argv[1];
 		fita = argv[2];
