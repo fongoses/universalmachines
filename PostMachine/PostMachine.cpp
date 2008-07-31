@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
 		cout << "Programa executando de maneira errada!" << endl
 				<< "Exemplo da linha de comando sem os \"[\" \"]\": " << endl;
 		cout
-				<< "[TuringMachine.exe] [programa.txt] [fila.txt] [alfabeto.txt] [saida.txt] [50]"
+				<< "[PostMachine.exe] [programa.txt] [fila.txt] [alfabeto.txt] [saida.txt] [50]"
 				<< endl;
 		system("pause");
 		exit(0);
