@@ -2,6 +2,7 @@
 
 OneStack::OneStack() {
 	this->fileOut = NULL;
+	this->loop = 0;
 }
 
 OneStack::~OneStack() {
@@ -20,6 +21,17 @@ void OneStack::tail(typeQueue tipo) {
 		}
 	}
 
+}
+void OneStack::setLoop(char* loop) {
+	string looping = (string)loop;
+
+	stringstream stm;
+	stm.str(looping);
+	stm >> this->loop;
+}
+
+int OneStack::getLoop() {
+	return (this->loop);
 }
 
 string OneStack::head(typeQueue tipo) {
@@ -69,7 +81,7 @@ void OneStack::insertDados(Entrada in, Saida out) {
 	this->delta.insert(pair<Entrada, Saida>(in, out) );
 }
 
-bool OneStack::executar() {
+string OneStack::executar() {
 	map<Entrada,Saida>::iterator it;
 	int tamanho = (int)this->delta.size();
 
@@ -84,7 +96,9 @@ bool OneStack::executar() {
 	bool isFila = false;
 	bool isStackOne = false;
 
-	while (true) {
+	int looping = this->getLoop();
+
+	while (looping >= 0) {
 		try {
 			isFila = false;
 			isStackOne = false;
@@ -147,9 +161,9 @@ bool OneStack::executar() {
 				this->concatenarBegin(saida.getConcatenarStack(0), STACKONE);
 			}
 			if (saida.getProximoEstado().compare("ACCEPT") == 0) {
-				return true;
+				return ("\n\nA Maquina de uma Pilha ACEITOU a palavra: ");
 			} else if (saida.getProximoEstado().compare("REJECT") == 0) {
-				return false;
+				return ("\n\nA Maquina de uma Pilha REJEITOU a palavra : ");
 			} else {
 				nextState = saida.getProximoEstado();
 			}
@@ -176,6 +190,7 @@ bool OneStack::executar() {
 
 			cabeca = "";
 			cabecaPilha = "";
+			looping--;
 		} catch (...) {
 			this->fileOut->write("ERRO DE EXECUCAO\n");
 			system("pause");
@@ -183,7 +198,8 @@ bool OneStack::executar() {
 		}
 
 	}
-	return false;
+	return ("\n\nA maquina de 2 Pilhas entrou em LOOP (laco de \""
+			+this->IntToString(this->loop) +"\" repeticoes) para a palavra: ");
 }
 void OneStack::lookAhead(Entrada entrada, Saida saida, bool *isStackOne,
 		bool *isFila) {
@@ -250,13 +266,16 @@ void OneStack::showDelta() {
 	map<Entrada,Saida>::iterator it;
 	this->fileOut->write("Funcao Programa da Maquina de 1 PILHA:\n\n");
 	for (it = this->delta.begin(); it != this->delta.end(); it++) {
-		this->fileOut->write("estado: " + (*it).first.getEstado()+ "   head: "
-				+ (*it).first.getHead() + "   headPilha: " + (*it).first.getHeadStack(0)
-				+ "    =>     concatenar: " + (*it).second.getConcatenar()+ "   concatenar Pilha:"
-				+ (*it).second.getConcatenarStack(0)+"   proximo: "
-				+(*it).second.getProximoEstado()+"\n");
+		this->fileOut->write("estado: " + (*it).first.getEstado()+ "   head: " + (*it).first.getHead() + "   headPilha: " + (*it).first.getHeadStack(0) + "    =>     concatenar: " + (*it).second.getConcatenar()+ "   concatenar Pilha:" + (*it).second.getConcatenarStack(0)+"   proximo: " +(*it).second.getProximoEstado()+"\n");
 
 	}
 	this->fileOut->write("---------------------------------------------------------------------------------- \n");
 	this->fileOut->write("\n\n\n");
 }
+
+string OneStack::IntToString(int num) {
+	stringstream out;
+	out << num;
+	return (out.str());
+}
+

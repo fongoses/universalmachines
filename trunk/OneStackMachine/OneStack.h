@@ -10,6 +10,7 @@
 #include "Saida.h"
 #include "Cadeia.h"
 #include "etc\Arquivo.h"
+#include <sstream>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ public:
 
 	void tail(typeQueue);
 	string head(typeQueue);
-	bool executar();
+	string executar();
 	void concatenarBegin(string,typeQueue);
 	void concatenarEnd(string,typeQueue);
 	void setPalavraEntrada(list<string>);
@@ -32,12 +33,16 @@ public:
 	void showPilha(int);
 	void showDelta();
 	void setFileOut(Arquivo*);
+	void setLoop(char*);
+	int getLoop();
+	string IntToString(int); 
 	virtual ~OneStack();
 
 private:
 	
 	void lookAhead(Entrada,Saida,bool*,bool*);
 	Cadeia cadeia;
+	int loop;
 	map<Entrada,Saida> delta;
 	bool isEmpty(typeQueue);
 	list<string> palavraEntrada;
